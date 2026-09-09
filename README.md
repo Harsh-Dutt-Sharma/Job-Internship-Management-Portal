@@ -11,26 +11,28 @@ The portal provides a user-friendly interface for:
 - Tracking application status through a dashboard
 - Navigating opportunities through a consistent and responsive UI
 
-## Pages
+## Project Scope
 
-1. **Home** – Introduction, search, and featured opportunities
-2. **Jobs & Internships** – Browse and filter available opportunities
-3. **Opportunity Details** – View complete information about an opportunity
-4. **Application Dashboard** – Track applications and their current status
+This project focuses on developing the frontend interface of a Job & Internship Management Portal using HTML5, CSS3, and Bootstrap CSS.
+
+The project includes four main views:
+
+1. Home
+2. Jobs & Internships
+3. Opportunity Details
+4. Application Dashboard
 
 ## Technologies Used
 
 - HTML5
-- Vanilla CSS
+- CSS3
+- Bootstrap CSS
 
-## Project Scope
+## Future Advancements
 
-This project focuses on the **frontend user interface** and does not include backend services, database integration, authentication, or APIs.
+The project can be further enhanced in future versions by:
 
-## Team
-
-Developed as a collaborative academic project by a team of four students.
-
----
-
-**Academic Project | B.Tech CSE**
+- Integrating JavaScript for interactive features and dynamic user interactions
+- Migrating the frontend to React.js for reusable components and better UI management
+- Adding backend services and database integration
+- Implementing user authentication and personalized application tracking
