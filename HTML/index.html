@@ -45,8 +45,8 @@
       <div class="topbar-right">
         <button class="icon-btn">🔔<span class="dot"></span></button>
         <div class="user">
-          <span class="avatar">HS</span>
-          <span class="user-name">Harsh Sharma ▾</span>
+          <span class="avatar">U</span>
+          <span class="user-name">User ▾</span>
         </div>
       </div>
     </header>
@@ -163,7 +163,7 @@
 
             <article class="job-card" data-company="Google" data-title="Frontend Developer Intern" data-skills="React JavaScript CSS" data-location="Bengaluru" data-experience="Internship">
               <div class="job-logo logo-google">
-                <img src="https://www.google.com/s2/favicons?domain=google.com&sz=128" alt="Google logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <img src="https://www.google.com/s2/favicons?domain=google.com&sz=128" alt="Google logo">
                 <span class="logo-fallback">G</span>
               </div>
               <div class="job-body">
@@ -185,7 +185,7 @@
 
             <article class="job-card" data-company="Microsoft" data-title="Software Engineer" data-skills="Java Spring Boot SQL" data-location="Hyderabad" data-experience="0 - 2 years">
               <div class="job-logo logo-ms">
-                <img src="https://www.google.com/s2/favicons?domain=microsoft.com&sz=128" alt="Microsoft logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <img src="https://www.google.com/s2/favicons?domain=microsoft.com&sz=128" alt="Microsoft logo">
                 <span class="logo-fallback">M</span>
               </div>
               <div class="job-body">
@@ -207,7 +207,7 @@
 
             <article class="job-card" data-company="Amazon" data-title="Data Analyst Intern" data-skills="Python SQL Data Analysis" data-location="Bengaluru" data-experience="Internship">
               <div class="job-logo logo-amazon">
-                <img src="https://www.google.com/s2/favicons?domain=amazon.com&sz=128" alt="Amazon logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <img src="https://www.google.com/s2/favicons?domain=amazon.com&sz=128" alt="Amazon logo">
                 <span class="logo-fallback">a</span>
               </div>
               <div class="job-body">
@@ -229,7 +229,7 @@
 
             <article class="job-card" data-company="Swiggy" data-title="Product Designer" data-skills="Figma UI/UX Prototyping" data-location="Gurugram" data-experience="2 - 4 years">
               <div class="job-logo logo-swiggy">
-                <img src="https://www.google.com/s2/favicons?domain=swiggy.com&sz=128" alt="Swiggy logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <img src="https://www.google.com/s2/favicons?domain=swiggy.com&sz=128" alt="Swiggy logo">
                 <span class="logo-fallback">$</span>
               </div>
               <div class="job-body">
@@ -251,7 +251,7 @@
 
             <article class="job-card" data-company="Zomato" data-title="Backend Developer" data-skills="Node.js Express MongoDB" data-location="Remote" data-experience="1 - 3 years">
               <div class="job-logo logo-zomato">
-                <img src="https://www.google.com/s2/favicons?domain=zomato.com&sz=128" alt="Zomato logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <img src="https://www.google.com/s2/favicons?domain=zomato.com&sz=128" alt="Zomato logo">
                 <span class="logo-fallback">Z</span>
               </div>
               <div class="job-body">
@@ -273,7 +273,7 @@
 
             <article class="job-card" data-company="TCS" data-title="ML Engineer Intern" data-skills="Python Machine Learning AI" data-location="Chennai" data-experience="Internship">
               <div class="job-logo logo-tcs">
-                <img src="https://www.google.com/s2/favicons?domain=tcs.com&sz=128" alt="TCS logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <img src="https://www.google.com/s2/favicons?domain=tcs.com&sz=128" alt="TCS logo">
                 <span class="logo-fallback">tcs</span>
               </div>
               <div class="job-body">
@@ -294,10 +294,6 @@
             </article>
 
           </div>
-
-          <p class="no-results" id="noResults" style="display:none;">
-            No opportunities match your search. Try a different company, title or skill.
-          </p>
 
           <!-- Pagination -->
           <div class="pagination">
@@ -384,56 +380,6 @@
 
   </main>
 </div>
-
-<script>
-  const searchInput = document.getElementById('searchInput');
-  const locationSelect = document.getElementById('locationSelect');
-  const experienceSelect = document.getElementById('experienceSelect');
-  const searchBtn = document.getElementById('searchBtn');
-  const jobList = document.getElementById('jobList');
-  const jobCards = Array.from(jobList.querySelectorAll('.job-card'));
-  const noResults = document.getElementById('noResults');
-  const resultsCount = document.getElementById('resultsCount');
-  const totalCount = jobCards.length;
-
-  function filterJobs() {
-    const query = searchInput.value.trim().toLowerCase();
-    const location = locationSelect.value;
-    const experience = experienceSelect.value;
-    let visibleCount = 0;
-
-    jobCards.forEach(card => {
-      const company = (card.dataset.company || '').toLowerCase();
-      const title = (card.dataset.title || '').toLowerCase();
-      const skills = (card.dataset.skills || '').toLowerCase();
-      const cardLocation = card.dataset.location || '';
-      const cardExperience = card.dataset.experience || '';
-
-      const matchesQuery = !query || company.includes(query) || title.includes(query) || skills.includes(query);
-      const matchesLocation = !location || cardLocation === location;
-      const matchesExperience = !experience || cardExperience === experience;
-
-      const matches = matchesQuery && matchesLocation && matchesExperience;
-      card.style.display = matches ? '' : 'none';
-      if (matches) visibleCount++;
-    });
-
-    noResults.style.display = visibleCount === 0 ? '' : 'none';
-
-    const activeFilters = [query, location, experience].filter(Boolean);
-    resultsCount.textContent = activeFilters.length
-      ? `Showing ${visibleCount} of ${visibleCount} results`
-      : `Showing 1 - ${totalCount} of 1,245 results`;
-  }
-
-  searchInput.addEventListener('input', filterJobs);
-  locationSelect.addEventListener('change', filterJobs);
-  experienceSelect.addEventListener('change', filterJobs);
-  searchBtn.addEventListener('click', filterJobs);
-  searchInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter') filterJobs();
-  });
-</script>
 
 </body>
 </html>
