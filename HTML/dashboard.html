@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JobPortal - Dashboard</title>
+  <link rel="stylesheet" href="..\CSS\dashboard.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+</head>
+
+<body>
+  <header class="top-header">
+    <nav class="navbar">
+      <div class="company-info">
+        <a href="#" class="text-logo" aria-label="JobPortal home">
+          <img src="../images/suitcase_logo.png" alt="JobPortal logo" />
+          <span class="company-name">Job<span>Portal</span></span>
+        </a>
+
+        <button type="button" class="menu-btn" aria-label="Toggle navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+      <div class="navbar-actions">
+        <div class="notification">
+          <button type="button" class="notification-btn" aria-label="Notifications">
+            <i class="fa-regular fa-bell"></i>
+          </button>
+          <span class="notification-dot"></span>
+        </div>
+
+        <div class="profile">
+          <span class="profile-icon">IR</span>
+          <span class="name">Isha Rana</span>
+          <i class="fa-solid fa-chevron-down down-arrow"></i>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <aside class="sidebar">
+    <nav class="sidebar-navigation" aria-label="Main navigation">
+      <a href="#" class="sidebar-action active">
+        <span class="action-logo">
+          <i class="fa-solid fa-table-cells-large"></i>
+        </span>
+        <span class="action-name">Dashboard</span>
+      </a>
+
+      <a href="#" class="sidebar-action">
+        <span class="action-logo">
+          <i class="fa-regular fa-file-lines"></i>
+        </span>
+        <span class="action-name">My Applications</span>
+      </a>
+
+      <a href="#" class="sidebar-action">
+        <span class="action-logo">
+          <i class="fa-regular fa-bookmark"></i>
+        </span>
+        <span class="action-name">Saved Jobs</span>
+      </a>
+
+      <a href="#" class="sidebar-action">
+        <span class="action-logo">
+          <i class="fa-regular fa-bell"></i>
+        </span>
+        <span class="action-name">Alerts</span>
+      </a>
+
+      <a href="#" class="sidebar-action">
+        <span class="action-logo">
+          <i class="fa-regular fa-user"></i>
+        </span>
+        <span class="action-name">Profile</span>
+      </a>
+
+      <a href="#" class="sidebar-action">
+        <span class="action-logo">
+          <i class="fa-solid fa-gear"></i>
+        </span>
+        <span class="action-name">Settings</span>
+      </a>
+
+      <a href="#" class="sidebar-action">
+        <span class="action-logo">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </span>
+        <span class="action-name">Logout</span>
+      </a>
+    </nav>
+
+    <div class="help-card">
+      <div class="help-icon">
+        <i class="fa-solid fa-question"></i>
+      </div>
+
+      <h3>Need Help?</h3>
+      <p>We're here to help you.</p>
+      <p>Visit our help center or contact support.</p>
+
+      <a href="#" class="help-button">Visit Help Center</a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <section class="dashboard-heading">
+      <h1>Dashboard</h1>
+      <p>Welcome back, Isha! Here's your application overview.</p>
+    </section>
+
+    <section class="summary-cards">
+      <div class="summary-card total-card">
+        <div class="summary-icon">
+          <i class="fa-regular fa-file-lines"></i>
+        </div>
+
+        <div class="summary-info">
+          <h3>Total Applications</h3>
+          <span class="summary-number">12</span>
+          <p>View all your applications</p>
+        </div>
+      </div>
+
+      <div class="summary-card shortlisted-card">
+        <div class="summary-icon">
+          <i class="fa-solid fa-check"></i>
+        </div>
+
+        <div class="summary-info">
+          <h3>Shortlisted</h3>
+          <span class="summary-number">3</span>
+          <p>Great! Keep it up.</p>
+        </div>
+      </div>
+
+      <div class="summary-card review-card">
+        <div class="summary-icon">
+          <i class="fa-solid fa-hourglass-half"></i>
+        </div>
+
+        <div class="summary-info">
+          <h3>In Review</h3>
+          <span class="summary-number">4</span>
+          <p>Applications under review</p>
+        </div>
+      </div>
+
+      <div class="summary-card rejected-card">
+        <div class="summary-icon">
+          <i class="fa-solid fa-xmark"></i>
+        </div>
+
+        <div class="summary-info">
+          <h3>Rejected</h3>
+          <span class="summary-number">5</span>
+          <p>Keep applying!</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="dashboard-panels">
+      <section class="dashboard-section recent-applications">
+        <div class="section-header">
+          <h2>Recent Applications</h2>
+          <a href="#" class="view-all">View All</a>
+        </div>
+
+        <div class="application-list">
+          <div class="application">
+            <div class="company-logo">
+              <img src="../images/google.png" alt="Google logo" />
+            </div>
+
+            <div class="job-role">
+              <h3>Frontend Developer Intern</h3>
+              <p>Google <span>•</span> Bengaluru, India</p>
+            </div>
+
+            <div class="application-date">
+              <span>Applied on</span>
+              <span>20 May 2025</span>
+            </div>
+
+            <span class="application-status shortlisted">Shortlisted</span>
+          </div>
+
+          <div class="application">
+            <div class="company-logo">
+              <img src="../images/microsoft.png" alt="Microsoft logo" />
+            </div>
+
+            <div class="job-role">
+              <h3>Web Developer Intern</h3>
+              <p>Microsoft <span>•</span> Noida, India</p>
+            </div>
+
+            <div class="application-date">
+              <span>Applied on</span>
+              <span>18 May 2025</span>
+            </div>
+
+            <span class="application-status in-review">In Review</span>
+          </div>
+
+          <div class="application">
+            <div class="company-logo">
+              <img src="../images/swiggy.png" alt="Swiggy logo" />
+            </div>
+
+            <div class="job-role">
+              <h3>Software Engineer Intern</h3>
+              <p>Swiggy <span>•</span> Bengaluru, India</p>
+            </div>
+
+            <div class="application-date">
+              <span>Applied on</span>
+              <span>15 May 2025</span>
+            </div>
+
+            <span class="application-status shortlisted">Shortlisted</span>
+          </div>
+
+          <div class="application">
+            <div class="company-logo">
+              <img src="../images/amazon.png" alt="Amazon logo" />
+            </div>
+
+            <div class="job-role">
+              <h3>Frontend Developer Intern</h3>
+              <p>Amazon <span>•</span> Hyderabad, India</p>
+            </div>
+
+            <div class="application-date">
+              <span>Applied on</span>
+              <span>10 May 2025</span>
+            </div>
+
+            <span class="application-status rejected">Rejected</span>
+          </div>
+
+          <div class="application">
+            <div class="company-logo">
+              <img src="../images/zomato.png" alt="Zomato logo" />
+            </div>
+
+            <div class="job-role">
+              <h3>UI Developer Intern</h3>
+              <p>Zomato <span>•</span> Gurugram, India</p>
+            </div>
+
+            <div class="application-date">
+              <span>Applied on</span>
+              <span>5 May 2025</span>
+            </div>
+
+            <span class="application-status rejected">Rejected</span>
+          </div>
+
+          <button type="button" class="applications-button">
+            View All Applications
+          </button>
+        </div>
+      </section>
+
+      <section class="dashboard-section saved-jobs">
+        <div class="section-header">
+          <h2>Saved Jobs</h2>
+          <a href="#" class="view-all">View All</a>
+        </div>
+
+        <div class="saved-jobs-list">
+          <div class="job-card">
+            <div class="job-info">
+              <h3 class="job-role">React Developer</h3>
+              <p class="company-location">Infosys <span>•</span> Pune, India</p>
+            </div>
+
+            <div class="saved-date">
+              <span class="date-label">Saved on</span>
+              <span class="date">22 May 2025</span>
+            </div>
+
+            <button type="button" class="save-icon" aria-label="Save React Developer job">
+              <i class="fa-solid fa-bookmark"></i>
+            </button>
+          </div>
+
+          <div class="job-card">
+            <div class="job-info">
+              <h3 class="job-role">Frontend Developer</h3>
+              <p class="company-location">TCS <span>•</span> Chennai, India</p>
+            </div>
+
+            <div class="saved-date">
+              <span class="date-label">Saved on</span>
+              <span class="date">21 May 2025</span>
+            </div>
+
+            <button type="button" class="save-icon" aria-label="Save Frontend Developer job">
+              <i class="fa-solid fa-bookmark"></i>
+            </button>
+          </div>
+
+          <div class="job-card">
+            <div class="job-info">
+              <h3 class="job-role">Web Developer</h3>
+              <p class="company-location">Deloitte <span>•</span> Bengaluru, India</p>
+            </div>
+
+            <div class="saved-date">
+              <span class="date-label">Saved on</span>
+              <span class="date">19 May 2025</span>
+            </div>
+
+            <button type="button" class="save-icon" aria-label="Save Web Developer job">
+              <i class="fa-solid fa-bookmark"></i>
+            </button>
+          </div>
+
+          <div class="job-card">
+            <div class="job-info">
+              <h3 class="job-role">UI/UX Developer</h3>
+              <p class="company-location">Flipkart <span>•</span> Bengaluru, India</p>
+            </div>
+
+            <div class="saved-date">
+              <span class="date-label">Saved on</span>
+              <span class="date">18 May 2025</span>
+            </div>
+
+            <button type="button" class="save-icon" aria-label="Save UI/UX Developer job">
+              <i class="fa-solid fa-bookmark"></i>
+            </button>
+          </div>
+
+          <div class="job-card">
+            <div class="job-info">
+              <h3 class="job-role">Software Engineer Intern</h3>
+              <p class="company-location">Paytm <span>•</span> Noida, India</p>
+            </div>
+
+            <div class="saved-date">
+              <span class="date-label">Saved on</span>
+              <span class="date">15 May 2025</span>
+            </div>
+
+            <button type="button" class="save-icon" aria-label="Save Software Engineer Intern job">
+              <i class="fa-solid fa-bookmark"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="motivation-banner">
+      <div class="motivation-image">
+        <img
+          src="../images/motivation-illustration.png"
+          alt="Career motivation illustration"
+        />
+      </div>
+
+      <div class="motivation-content">
+        <h2>Keep Going, Isha!</h2>
+        <p>Opportunities don't happen, you create them.</p>
+        <p>Apply more and achieve your dreams!</p>
+      </div>
+
+      <a href="#" class="browse-jobs-button">Browse Jobs</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 JobPortal. All rights reserved.</p>
+  </footer>
+</body>
+</html>
