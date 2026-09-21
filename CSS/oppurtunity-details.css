@@ -83,3 +83,17 @@ nav + a {
   margin-bottom: 12px;
 }
 
+.btn-apply-small {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.btn-apply-small:hover {
+    background-color: #0056b3;
+}

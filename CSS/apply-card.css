@@ -142,3 +142,25 @@ textarea {
 .submit-btn:hover {
     background-color: #1d4ed8;
 }
+
+.back-home {
+    margin: 20px 0;
+}
+
+.back-home {
+    margin: 20px 0;
+}
+
+.back-home a {
+    display: inline-block;
+    padding: 9px 18px;
+    background-color: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.back-home a:hover {
+    background-color: #1d4ed8;
+}
