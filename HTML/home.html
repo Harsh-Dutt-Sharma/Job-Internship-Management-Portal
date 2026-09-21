@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CareerHub - discover jobs, internships and career opportunities for students.">
+
+    <title>CareerHub | Job & Internship Portal</title>
+
+    <!-- Bootstrap CSS (must load BEFORE home.css so our styles can override it) -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    >
+
+    <!-- Font Awesome (UI icons + company brand icons) -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Our own styles -->
+    <link rel="stylesheet" href="../CSS/home.css">
+</head>
+
+<body id="top">
+
+    <!-- ================= ANNOUNCEMENT STRIP (Bootstrap dismissible alert) ================= -->
+
+    <div class="top-strip alert alert-dismissible fade show rounded-0 border-0 mb-0" role="alert">
+        <i class="fa-solid fa-bullhorn"></i>
+        Campus Hiring Drive 2026 is live &mdash; 40+ companies are hiring freshers.
+        <a href="#trending">See openings</a>
+
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+
+    <!-- ================= NAVBAR (Bootstrap navbar + dropdowns) ================= -->
+
+    <nav class="navbar navbar-expand-lg site-nav sticky-top">
+
+        <div class="container-fluid p-0">
+
+            <a href="index.html" class="logo order-0">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-briefcase"></i>
+                </div>
+
+                <span>Career<span>Hub</span></span>
+            </a>
+
+
+            <!-- RIGHT SIDE: notifications + profile -->
+            <div class="nav-right order-1 order-lg-2 ms-auto">
+
+                <!-- Notifications dropdown -->
+                <div class="dropdown">
+
+                    <button
+                        class="notification"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        aria-label="Notifications"
+                    >
+                        <i class="fa-regular fa-bell"></i>
+                        <span></span>
+                    </button>
+
+                    <div class="dropdown-menu dropdown-menu-end notif-menu">
+
+                        <div class="notif-head">
+                            <strong>Notifications</strong>
+                            <small>3 new</small>
+                        </div>
+
+                        <a class="notif-item" href="#">
+                            <div class="notif-icon google"><i class="fa-brands fa-google"></i></div>
+                            <div>
+                                <p>Google viewed your application</p>
+                                <small>Frontend Developer Intern &bull; 2h ago</small>
+                            </div>
+                        </a>
+
+                        <a class="notif-item" href="#">
+                            <div class="notif-icon microsoft"><i class="fa-brands fa-microsoft"></i></div>
+                            <div>
+                                <p>New role matches your skills</p>
+                                <small>Software Engineer &bull; 5h ago</small>
+                            </div>
+                        </a>
+
+                        <a class="notif-item" href="#">
+                            <div class="notif-icon amazon"><i class="fa-brands fa-amazon"></i></div>
+                            <div>
+                                <p>Application deadline tomorrow</p>
+                                <small>Data Analyst Intern &bull; 1d ago</small>
+                            </div>
+                        </a>
+
+                        <a class="notif-foot" href="#">View all notifications</a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Profile dropdown -->
+                <div class="dropdown">
+
+                    <button
+                        class="profile"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        <div class="avatar">HS</div>
+
+                        <div class="profile-info">
+                            <strong>Harsh Sharma</strong>
+                            <small>Student</small>
+                        </div>
+
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-menu-end profile-menu">
+                        <li><a class="dropdown-item" href="#"><i class="fa-regular fa-user"></i> My Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa-regular fa-bookmark"></i> Saved Jobs</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa-regular fa-file-lines"></i> My Applications</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log out</a></li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <!-- Hamburger (mobile) -->
+            <button
+                class="navbar-toggler order-2 ms-3"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNav"
+                aria-controls="mainNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+
+            <!-- NAV LINKS -->
+            <div class="collapse navbar-collapse order-3 order-lg-1" id="mainNav">
+
+                <ul class="navbar-nav nav-links">
+
+                    <li class="nav-item">
+                        <a href="index.html" class="active">
+                            <i class="fa-solid fa-house"></i>
+                            Home
+                        </a>
+                    </li>
+
+                    <!-- Teammate's Dashboard page -->
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fa-solid fa-chart-line"></i>
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <!-- Teammate's Jobs page -->
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fa-solid fa-briefcase"></i>
+                            Jobs & Internships
+                        </a>
+                    </li>
+
+                    <!-- Teammate's Discover page -->
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fa-solid fa-compass"></i>
+                            Discover
+                        </a>
+                    </li>
+
+                    <!-- Teammate's Opportunity page -->
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fa-solid fa-rocket"></i>
+                            Opportunities
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <main>
+
+        <!-- ================= HERO ================= -->
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="hero-badge">
+                    <i class="fa-solid fa-sparkles"></i>
+                    Your career starts here
+                </div>
+
+
+                <!-- The last word rotates using a pure CSS animation -->
+                <h1>
+                    Find your next
+                    <span class="rotator" aria-label="opportunity">
+                        <span aria-hidden="true">opportunity.</span>
+                        <span aria-hidden="true">internship.</span>
+                        <span aria-hidden="true">career.</span>
+                    </span>
+                </h1>
+
+
+                <p>
+                    Discover jobs, internships and career opportunities
+                    from companies looking for talented students like you.
+                </p>
+
+
+                <!-- SEARCH -->
+
+                <form class="search-box" action="#" role="search">
+
+                    <label class="search-field">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                            type="text"
+                            placeholder="Search jobs, internships or skills..."
+                            aria-label="Search jobs, internships or skills"
+                        >
+                    </label>
+
+
+                    <label class="location-field">
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <select aria-label="Location">
+                            <option>Any Location</option>
+                            <option>Remote</option>
+                            <option>Delhi NCR</option>
+                            <option>Bengaluru</option>
+                            <option>Hyderabad</option>
+                            <option>Mumbai</option>
+                            <option>Pune</option>
+                        </select>
+                    </label>
+
+
+                    <button type="submit" class="search-btn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        Search
+                    </button>
+
+                </form>
+
+
+                <!-- POPULAR SEARCHES -->
+
+                <div class="popular-searches">
+
+                    <span>Popular:</span>
+
+                    <a href="#"><i class="fa-solid fa-code"></i> Software Development</a>
+                    <a href="#"><i class="fa-solid fa-database"></i> Data Science</a>
+                    <a href="#"><i class="fa-solid fa-brain"></i> AI / ML</a>
+                    <a href="#"><i class="fa-solid fa-globe"></i> Web Development</a>
+                    <a href="#"><i class="fa-solid fa-graduation-cap"></i> Internships</a>
+
+                </div>
+
+
+                <!-- SOCIAL PROOF -->
+
+                <div class="hero-proof">
+
+                    <div class="avatar-stack">
+                        <span class="a1">AS</span>
+                        <span class="a2">RK</span>
+                        <span class="a3">PM</span>
+                        <span class="a4">+10K</span>
+                    </div>
+
+                    <div>
+                        <div class="stars" aria-label="Rated 4.8 out of 5">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                            <b>4.8</b>
+                        </div>
+                        <small>Trusted by students from 200+ colleges</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- HERO GRAPHIC -->
+
+            <div class="hero-visual">
+
+                <div class="circle-bg"></div>
+
+                <div class="person">
+
+                    <div class="hair"></div>
+
+                    <div class="head"></div>
+
+                    <div class="body">
+
+                        <div class="laptop">
+
+                            <div class="screen">
+                                <div class="screen-line"></div>
+                                <div class="screen-line short"></div>
+                                <div class="screen-line"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COMPANY BUBBLES (float gently) -->
+
+                <span class="orbit-icon o1 google" title="Google"><i class="fa-brands fa-google"></i></span>
+                <span class="orbit-icon o2 microsoft" title="Microsoft"><i class="fa-brands fa-microsoft"></i></span>
+                <span class="orbit-icon o3 amazon" title="Amazon"><i class="fa-brands fa-amazon"></i></span>
+                <span class="orbit-icon o4 meta" title="Meta"><i class="fa-brands fa-meta"></i></span>
+
+
+                <!-- FLOATING CARDS -->
+
+                <div class="floating-card opportunity-card">
+
+                    <div class="floating-icon blue-icon">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+
+                    <div>
+                        <strong>1,245+</strong>
+                        <span>Active opportunities</span>
+                    </div>
+
+                </div>
+
+
+                <div class="floating-card placement-card">
+
+                    <div class="floating-icon green-icon">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+
+                    <div>
+                        <strong>10K+</strong>
+                        <span>Students placed</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= COMPANY MARQUEE (pure CSS scroll) ================= -->
+
+        <section class="trusted" aria-label="Companies hiring through CareerHub">
+
+            <p class="trusted-title">Students from our network work at</p>
+
+            <div class="marquee">
+
+                <div class="marquee-track">
+
+                    <!-- Set 1 -->
+                    <span class="brand google"><i class="fa-brands fa-google"></i> Google</span>
+                    <span class="brand microsoft"><i class="fa-brands fa-microsoft"></i> Microsoft</span>
+                    <span class="brand amazon"><i class="fa-brands fa-amazon"></i> Amazon</span>
+                    <span class="brand meta"><i class="fa-brands fa-meta"></i> Meta</span>
+                    <span class="brand apple"><i class="fa-brands fa-apple"></i> Apple</span>
+                    <span class="brand spotify"><i class="fa-brands fa-spotify"></i> Spotify</span>
+                    <span class="brand adobe"><i class="fa-brands fa-adobe"></i> Adobe</span>
+                    <span class="brand github"><i class="fa-brands fa-github"></i> GitHub</span>
+                    <span class="brand slack"><i class="fa-brands fa-slack"></i> Slack</span>
+                    <span class="brand paypal"><i class="fa-brands fa-paypal"></i> PayPal</span>
+                    <span class="brand uber"><i class="fa-brands fa-uber"></i> Uber</span>
+                    <span class="brand airbnb"><i class="fa-brands fa-airbnb"></i> Airbnb</span>
+                    <span class="brand salesforce"><i class="fa-brands fa-salesforce"></i> Salesforce</span>
+                    <span class="brand atlassian"><i class="fa-brands fa-atlassian"></i> Atlassian</span>
+
+                    <!-- Set 2 (duplicate so the loop looks endless) -->
+                    <span class="brand google" aria-hidden="true"><i class="fa-brands fa-google"></i> Google</span>
+                    <span class="brand microsoft" aria-hidden="true"><i class="fa-brands fa-microsoft"></i> Microsoft</span>
+                    <span class="brand amazon" aria-hidden="true"><i class="fa-brands fa-amazon"></i> Amazon</span>
+                    <span class="brand meta" aria-hidden="true"><i class="fa-brands fa-meta"></i> Meta</span>
+                    <span class="brand apple" aria-hidden="true"><i class="fa-brands fa-apple"></i> Apple</span>
+                    <span class="brand spotify" aria-hidden="true"><i class="fa-brands fa-spotify"></i> Spotify</span>
+                    <span class="brand adobe" aria-hidden="true"><i class="fa-brands fa-adobe"></i> Adobe</span>
+                    <span class="brand github" aria-hidden="true"><i class="fa-brands fa-github"></i> GitHub</span>
+                    <span class="brand slack" aria-hidden="true"><i class="fa-brands fa-slack"></i> Slack</span>
+                    <span class="brand paypal" aria-hidden="true"><i class="fa-brands fa-paypal"></i> PayPal</span>
+                    <span class="brand uber" aria-hidden="true"><i class="fa-brands fa-uber"></i> Uber</span>
+                    <span class="brand airbnb" aria-hidden="true"><i class="fa-brands fa-airbnb"></i> Airbnb</span>
+                    <span class="brand salesforce" aria-hidden="true"><i class="fa-brands fa-salesforce"></i> Salesforce</span>
+                    <span class="brand atlassian" aria-hidden="true"><i class="fa-brands fa-atlassian"></i> Atlassian</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= STATS ================= -->
+
+        <section class="stats">
+
+            <div class="row g-3">
+
+                <div class="col-6 col-lg-3">
+                    <div class="stat-card">
+
+                        <div class="stat-icon blue">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </div>
+
+                        <div>
+                            <h3>1,245+</h3>
+                            <p>Active Opportunities</p>
+                            <small class="trend up"><i class="fa-solid fa-arrow-trend-up"></i> +86 this week</small>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-6 col-lg-3">
+                    <div class="stat-card">
+
+                        <div class="stat-icon green">
+                            <i class="fa-solid fa-building"></i>
+                        </div>
+
+                        <div>
+                            <h3>120+</h3>
+                            <p>Top Companies</p>
+                            <small class="trend up"><i class="fa-solid fa-arrow-trend-up"></i> +9 new</small>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-6 col-lg-3">
+                    <div class="stat-card">
+
+                        <div class="stat-icon purple">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+
+                        <div>
+                            <h3>10,000+</h3>
+                            <p>Students Placed</p>
+                            <small class="trend up"><i class="fa-solid fa-arrow-trend-up"></i> Since 2020</small>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-6 col-lg-3">
+                    <div class="stat-card">
+
+                        <div class="stat-icon orange">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+
+                        <div>
+                            <h3>4.8/5</h3>
+                            <p>Student Satisfaction</p>
+                            <small class="trend"><i class="fa-solid fa-comment-dots"></i> 3,200+ reviews</small>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= TRENDING JOBS ================= -->
+
+        <section class="section jobs-section" id="trending">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="eyebrow">TRENDING NOW</span>
+
+                    <h2>Popular opportunities</h2>
+
+                    <p>
+                        Explore opportunities students are applying for right now.
+                    </p>
+                </div>
+
+                <!-- Later connect this to Jobs teammate -->
+                <a href="#" class="view-all">
+                    View all
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+
+            <!-- FILTER PILLS (radio buttons + CSS :has() = no JavaScript needed) -->
+
+            <div class="filter-bar" role="radiogroup" aria-label="Filter opportunities">
+
+                <input type="radio" class="btn-check" name="jobfilter" id="f-all" checked>
+                <label class="filter-pill" for="f-all"><i class="fa-solid fa-layer-group"></i> All</label>
+
+                <input type="radio" class="btn-check" name="jobfilter" id="f-intern">
+                <label class="filter-pill" for="f-intern"><i class="fa-solid fa-graduation-cap"></i> Internships</label>
+
+                <input type="radio" class="btn-check" name="jobfilter" id="f-full">
+                <label class="filter-pill" for="f-full"><i class="fa-solid fa-user-tie"></i> Full Time</label>
+
+                <input type="radio" class="btn-check" name="jobfilter" id="f-remote">
+                <label class="filter-pill" for="f-remote"><i class="fa-solid fa-house-laptop"></i> Remote</label>
+
+            </div>
+
+
+            <div class="row g-3 job-grid">
+
+
+                <!-- JOB 1 -->
+
+                <div class="col-lg-6 job-item is-intern">
+                    <article class="job-card">
+
+                        <div class="job-top">
+
+                            <div class="company-logo google">
+                                <i class="fa-brands fa-google"></i>
+                            </div>
+
+                            <div class="job-details">
+                                <h3>Frontend Developer Intern <span class="pill new">New</span></h3>
+
+                                <p>
+                                    <i class="fa-solid fa-building"></i> Google
+                                    <span class="dot"></span>
+                                    <i class="fa-solid fa-location-dot"></i> Bengaluru
+                                </p>
+                            </div>
+
+                            <input type="checkbox" class="save-input visually-hidden" id="save1">
+                            <label class="bookmark" for="save1" title="Save this job">
+                                <i class="fa-regular fa-bookmark"></i>
+                                <i class="fa-solid fa-bookmark"></i>
+                            </label>
+
+                        </div>
+
+                        <div class="job-tags">
+                            <span>Internship</span>
+                            <span>On-site</span>
+                            <span>6 months</span>
+                        </div>
+
+                        <div class="job-meta">
+                            <span><i class="fa-solid fa-indian-rupee-sign"></i> 60K / month</span>
+                            <span><i class="fa-regular fa-clock"></i> 2 days ago</span>
+                            <span><i class="fa-solid fa-user-group"></i> 240 applicants</span>
+                        </div>
+
+                        <div class="job-footer">
+                            <div class="skills">
+                                <span>HTML</span><span>CSS</span><span>React</span>
+                            </div>
+                            <a href="#" class="apply-btn">Apply now <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+
+                    </article>
+                </div>
+
+
+
+                <!-- JOB 2 -->
+
+                <div class="col-lg-6 job-item is-full">
+                    <article class="job-card">
+
+                        <div class="job-top">
+
+                            <div class="company-logo microsoft">
+                                <i class="fa-brands fa-microsoft"></i>
+                            </div>
+
+                            <div class="job-details">
+                                <h3>Software Engineer <span class="pill hot">Hiring fast</span></h3>
+
+                                <p>
+                                    <i class="fa-solid fa-building"></i> Microsoft
+                                    <span class="dot"></span>
+                                    <i class="fa-solid fa-location-dot"></i> Hyderabad
+                                </p>
+                            </div>
+
+                            <input type="checkbox" class="save-input visually-hidden" id="save2">
+                            <label class="bookmark" for="save2" title="Save this job">
+                                <i class="fa-regular fa-bookmark"></i>
+                                <i class="fa-solid fa-bookmark"></i>
+                            </label>
+
+                        </div>
+
+                        <div class="job-tags">
+                            <span>Full Time</span>
+                            <span>Hybrid</span>
+                            <span>0-2 yrs</span>
+                        </div>
+
+                        <div class="job-meta">
+                            <span><i class="fa-solid fa-indian-rupee-sign"></i> 18-24 LPA</span>
+                            <span><i class="fa-regular fa-clock"></i> 1 week ago</span>
+                            <span><i class="fa-solid fa-user-group"></i> 512 applicants</span>
+                        </div>
+
+                        <div class="job-footer">
+                            <div class="skills">
+                                <span>C#</span><span>Azure</span><span>DSA</span>
+                            </div>
+                            <a href="#" class="apply-btn">Apply now <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+
+                    </article>
+                </div>
+
+
+
+                <!-- JOB 3 -->
+
+                <div class="col-lg-6 job-item is-intern is-remote">
+                    <article class="job-card">
+
+                        <div class="job-top">
+
+                            <div class="company-logo amazon">
+                                <i class="fa-brands fa-amazon"></i>
+                            </div>
+
+                            <div class="job-details">
+                                <h3>Data Analyst Intern</h3>
+
+                                <p>
+                                    <i class="fa-solid fa-building"></i> Amazon
+                                    <span class="dot"></span>
+                                    <i class="fa-solid fa-location-dot"></i> Remote
+                                </p>
+                            </div>
+
+                            <input type="checkbox" class="save-input visually-hidden" id="save3">
+                            <label class="bookmark" for="save3" title="Save this job">
+                                <i class="fa-regular fa-bookmark"></i>
+                                <i class="fa-solid fa-bookmark"></i>
+                            </label>
+
+                        </div>
+
+                        <div class="job-tags">
+                            <span>Internship</span>
+                            <span>Remote</span>
+                            <span>3 months</span>
+                        </div>
+
+                        <div class="job-meta">
+                            <span><i class="fa-solid fa-indian-rupee-sign"></i> 40K / month</span>
+                            <span><i class="fa-regular fa-clock"></i> 3 days ago</span>
+                            <span><i class="fa-solid fa-user-group"></i> 178 applicants</span>
+                        </div>
+
+                        <div class="job-footer">
+                            <div class="skills">
+                                <span>SQL</span><span>Excel</span><span>Python</span>
+                            </div>
+                            <a href="#" class="apply-btn">Apply now <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+
+                    </article>
+                </div>
+
+
+
+                <!-- JOB 4 -->
+
+                <div class="col-lg-6 job-item is-intern is-remote">
+                    <article class="job-card">
+
+                        <div class="job-top">
+
+                            <div class="company-logo meta">
+                                <i class="fa-brands fa-meta"></i>
+                            </div>
+
+                            <div class="job-details">
+                                <h3>AI / ML Intern <span class="pill new">New</span></h3>
+
+                                <p>
+                                    <i class="fa-solid fa-building"></i> Meta
+                                    <span class="dot"></span>
+                                    <i class="fa-solid fa-location-dot"></i> Remote
+                                </p>
+                            </div>
+
+                            <input type="checkbox" class="save-input visually-hidden" id="save4">
+                            <label class="bookmark" for="save4" title="Save this job">
+                                <i class="fa-regular fa-bookmark"></i>
+                                <i class="fa-solid fa-bookmark"></i>
+                            </label>
+
+                        </div>
+
+                        <div class="job-tags">
+                            <span>Internship</span>
+                            <span>Remote</span>
+                            <span>4 months</span>
+                        </div>
+
+                        <div class="job-meta">
+                            <span><i class="fa-solid fa-indian-rupee-sign"></i> 70K / month</span>
+                            <span><i class="fa-regular fa-clock"></i> Today</span>
+                            <span><i class="fa-solid fa-user-group"></i> 96 applicants</span>
+                        </div>
+
+                        <div class="job-footer">
+                            <div class="skills">
+                                <span>Python</span><span>PyTorch</span><span>ML</span>
+                            </div>
+                            <a href="#" class="apply-btn">Apply now <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+
+                    </article>
+                </div>
+
+
+
+                <!-- JOB 5 -->
+
+                <div class="col-lg-6 job-item is-intern">
+                    <article class="job-card">
+
+                        <div class="job-top">
+
+                            <div class="company-logo adobe">
+                                <i class="fa-brands fa-adobe"></i>
+                            </div>
+
+                            <div class="job-details">
+                                <h3>UI / UX Design Intern</h3>
+
+                                <p>
+                                    <i class="fa-solid fa-building"></i> Adobe
+                                    <span class="dot"></span>
+                                    <i class="fa-solid fa-location-dot"></i> Noida
+                                </p>
+                            </div>
+
+                            <input type="checkbox" class="save-input visually-hidden" id="save5">
+                            <label class="bookmark" for="save5" title="Save this job">
+                                <i class="fa-regular fa-bookmark"></i>
+                                <i class="fa-solid fa-bookmark"></i>
+                            </label>
+
+                        </div>
+
+                        <div class="job-tags">
+                            <span>Internship</span>
+                            <span>Hybrid</span>
+                            <span>6 months</span>
+                        </div>
+
+                        <div class="job-meta">
+                            <span><i class="fa-solid fa-indian-rupee-sign"></i> 35K / month</span>
+                            <span><i class="fa-regular fa-clock"></i> 4 days ago</span>
+                            <span><i class="fa-solid fa-user-group"></i> 121 applicants</span>
+                        </div>
+
+                        <div class="job-footer">
+                            <div class="skills">
+                                <span>Figma</span><span>Prototyping</span><span>Research</span>
+                            </div>
+                            <a href="#" class="apply-btn">Apply now <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+
+                    </article>
+                </div>
+
+
+
+                <!-- JOB 6 -->
+
+                <div class="col-lg-6 job-item is-full is-remote">
+                    <article class="job-card">
+
+                        <div class="job-top">
+
+                            <div class="company-logo spotify">
+                                <i class="fa-brands fa-spotify"></i>
+                            </div>
+
+                            <div class="job-details">
+                                <h3>Backend Developer <span class="pill hot">Closing soon</span></h3>
+
+                                <p>
+                                    <i class="fa-solid fa-building"></i> Spotify
+                                    <span class="dot"></span>
+                                    <i class="fa-solid fa-location-dot"></i> Remote
+                                </p>
+                            </div>
+
+                            <input type="checkbox" class="save-input visually-hidden" id="save6">
+                            <label class="bookmark" for="save6" title="Save this job">
+                                <i class="fa-regular fa-bookmark"></i>
+                                <i class="fa-solid fa-bookmark"></i>
+                            </label>
+
+                        </div>
+
+                        <div class="job-tags">
+                            <span>Full Time</span>
+                            <span>Remote</span>
+                            <span>0-1 yrs</span>
+                        </div>
+
+                        <div class="job-meta">
+                            <span><i class="fa-solid fa-indian-rupee-sign"></i> 15-20 LPA</span>
+                            <span><i class="fa-regular fa-clock"></i> 5 days ago</span>
+                            <span><i class="fa-solid fa-user-group"></i> 305 applicants</span>
+                        </div>
+
+                        <div class="job-footer">
+                            <div class="skills">
+                                <span>Java</span><span>APIs</span><span>SQL</span>
+                            </div>
+                            <a href="#" class="apply-btn">Apply now <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+
+                    </article>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= TOP COMPANIES ================= -->
+
+        <section class="section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="eyebrow">HIRING NOW</span>
+
+                    <h2>Top companies hiring</h2>
+
+                    <p>
+                        Companies with the most open roles for students this month.
+                    </p>
+                </div>
+
+                <a href="#" class="view-all">
+                    All companies
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+
+            <div class="row g-3">
+
+                <div class="col-6 col-md-4 col-lg-3">
+                    <a href="#" class="company-card google">
+                        <div class="company-logo"><i class="fa-brands fa-google"></i></div>
+                        <h3>Google</h3>
+                        <p>Search &amp; Cloud</p>
+                        <span class="openings"><i class="fa-solid fa-circle"></i> 42 openings</span>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3">
+                    <a href="#" class="company-card microsoft">
+                        <div class="company-logo"><i class="fa-brands fa-microsoft"></i></div>
+                        <h3>Microsoft</h3>
+                        <p>Software &amp; AI</p>
+                        <span class="openings"><i class="fa-solid fa-circle"></i> 38 openings</span>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3">
+                    <a href="#" class="company-card amazon">
+                        <div class="company-logo"><i class="fa-brands fa-amazon"></i></div>
+                        <h3>Amazon</h3>
+                        <p>E-commerce &amp; AWS</p>
+                        <span class="openings"><i class="fa-solid fa-circle"></i> 55 openings</span>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3">
+                    <a href="#" class="company-card meta">
+                        <div class="company-logo"><i class="fa-brands fa-meta"></i></div>
+                        <h3>Meta</h3>
+                        <p>Social &amp; AR/VR</p>
+                        <span class="openings"><i class="fa-solid fa-circle"></i> 21 openings</span>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3">
+                    <a href="#" class="company-card apple">
+                        <div class="company-logo"><i class="fa-brands fa-apple"></i></div>
+                        <h3>Apple</h3>
+                        <p>Devices &amp; Services</p>
+                        <span class="openings"><i class="fa-solid fa-circle"></i> 17 openings</span>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3">
+                    <a href="#" class="company-card adobe">
+                        <div class="company-logo"><i class="fa-brands fa-adobe"></i></div>
+                        <h3>Adobe</h3>
+                        <p>Creative Software</p>
+                        <span class="openings"><i class="fa-solid fa-circle"></i> 24 openings</span>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3">
+                    <a href="#" class="company-card spotify">
+                        <div class="company-logo"><i class="fa-brands fa-spotify"></i></div>
+                        <h3>Spotify</h3>
+                        <p>Music Streaming</p>
+                        <span class="openings"><i class="fa-solid fa-circle"></i> 12 openings</span>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3">
+                    <a href="#" class="company-card salesforce">
+                        <div class="company-logo"><i class="fa-brands fa-salesforce"></i></div>
+                        <h3>Salesforce</h3>
+                        <p>CRM &amp; Cloud</p>
+                        <span class="openings"><i class="fa-solid fa-circle"></i> 19 openings</span>
+                    </a>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= CATEGORIES ================= -->
+
+        <section class="section categories-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="eyebrow">EXPLORE</span>
+
+                    <h2>Explore by category</h2>
+
+                    <p>
+                        Find opportunities based on your interests and skills.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="row g-3">
+
+                <div class="col-md-6 col-lg-3">
+                    <a href="#" class="category-card">
+
+                        <div class="category-icon blue">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+
+                        <div class="category-info">
+                            <h3>Software Development</h3>
+                            <p>320+ opportunities</p>
+                        </div>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+                </div>
+
+
+                <div class="col-md-6 col-lg-3">
+                    <a href="#" class="category-card">
+
+                        <div class="category-icon purple">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+
+                        <div class="category-info">
+                            <h3>AI & Machine Learning</h3>
+                            <p>180+ opportunities</p>
+                        </div>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+                </div>
+
+
+                <div class="col-md-6 col-lg-3">
+                    <a href="#" class="category-card">
+
+                        <div class="category-icon green">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+
+                        <div class="category-info">
+                            <h3>Data Science</h3>
+                            <p>150+ opportunities</p>
+                        </div>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+                </div>
+
+
+                <div class="col-md-6 col-lg-3">
+                    <a href="#" class="category-card">
+
+                        <div class="category-icon orange">
+                            <i class="fa-solid fa-palette"></i>
+                        </div>
+
+                        <div class="category-info">
+                            <h3>UI / UX Design</h3>
+                            <p>90+ opportunities</p>
+                        </div>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+                </div>
+
+
+                <div class="col-md-6 col-lg-3">
+                    <a href="#" class="category-card">
+
+                        <div class="category-icon blue">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+
+                        <div class="category-info">
+                            <h3>Cyber Security</h3>
+                            <p>70+ opportunities</p>
+                        </div>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+                </div>
+
+
+                <div class="col-md-6 col-lg-3">
+                    <a href="#" class="category-card">
+
+                        <div class="category-icon purple">
+                            <i class="fa-solid fa-cloud"></i>
+                        </div>
+
+                        <div class="category-info">
+                            <h3>Cloud & DevOps</h3>
+                            <p>85+ opportunities</p>
+                        </div>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+                </div>
+
+
+                <div class="col-md-6 col-lg-3">
+                    <a href="#" class="category-card">
+
+                        <div class="category-icon green">
+                            <i class="fa-solid fa-mobile-screen-button"></i>
+                        </div>
+
+                        <div class="category-info">
+                            <h3>Mobile Development</h3>
+                            <p>110+ opportunities</p>
+                        </div>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+                </div>
+
+
+                <div class="col-md-6 col-lg-3">
+                    <a href="#" class="category-card">
+
+                        <div class="category-icon orange">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </div>
+
+                        <div class="category-info">
+                            <h3>Marketing & Content</h3>
+                            <p>60+ opportunities</p>
+                        </div>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= HOW IT WORKS ================= -->
+
+        <section class="section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="eyebrow">HOW IT WORKS</span>
+
+                    <h2>Get hired in three steps</h2>
+
+                    <p>
+                        From your first search to your offer letter.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="row g-3">
+
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <span class="step-num">1</span>
+
+                        <div class="step-icon blue">
+                            <i class="fa-solid fa-user-pen"></i>
+                        </div>
+
+                        <h3>Build your profile</h3>
+                        <p>Add your skills, projects and resume so companies can find you.</p>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <span class="step-num">2</span>
+
+                        <div class="step-icon purple">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i>
+                        </div>
+
+                        <h3>Find the right role</h3>
+                        <p>Search or filter by category, location and stipend, then save the roles you like.</p>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <span class="step-num">3</span>
+
+                        <div class="step-icon green">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </div>
+
+                        <h3>Apply and track</h3>
+                        <p>Apply in one click and follow every application from your dashboard.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= TESTIMONIALS (Bootstrap carousel) ================= -->
+
+        <section class="section">
+
+            <div class="row g-4 align-items-center">
+
+                <div class="col-lg-4">
+
+                    <span class="eyebrow">STUDENT STORIES</span>
+
+                    <h2 class="review-heading">Students who found their start here</h2>
+
+                    <p class="review-sub">
+                        Real journeys from classroom to first offer.
+                    </p>
+
+                    <div class="review-controls">
+
+                        <button
+                            class="review-arrow"
+                            type="button"
+                            data-bs-target="#reviews"
+                            data-bs-slide="prev"
+                            aria-label="Previous story"
+                        >
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+
+                        <button
+                            class="review-arrow"
+                            type="button"
+                            data-bs-target="#reviews"
+                            data-bs-slide="next"
+                            aria-label="Next story"
+                        >
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-8">
+
+                    <div id="reviews" class="carousel slide review-carousel" data-bs-ride="carousel" data-bs-interval="6000">
+
+                        <div class="carousel-inner">
+
+                            <div class="carousel-item active">
+                                <figure class="review">
+                                    <div class="stars">
+                                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                    </div>
+
+                                    <blockquote>
+                                        I applied to six internships in one evening. Two weeks later I had an
+                                        interview at Microsoft, and the dashboard kept every step organised.
+                                    </blockquote>
+
+                                    <figcaption>
+                                        <div class="reviewer-avatar">AV</div>
+                                        <div>
+                                            <strong>Ananya Verma</strong>
+                                            <small>Software Engineer Intern</small>
+                                        </div>
+                                        <span class="reviewer-company microsoft"><i class="fa-brands fa-microsoft"></i> Microsoft</span>
+                                    </figcaption>
+                                </figure>
+                            </div>
+
+
+                            <div class="carousel-item">
+                                <figure class="review">
+                                    <div class="stars">
+                                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                    </div>
+
+                                    <blockquote>
+                                        The category filters helped me discover data roles I didn't know existed.
+                                        I joined Amazon as a Data Analyst intern in my third year.
+                                    </blockquote>
+
+                                    <figcaption>
+                                        <div class="reviewer-avatar r2">RK</div>
+                                        <div>
+                                            <strong>Rohan Kapoor</strong>
+                                            <small>Data Analyst Intern</small>
+                                        </div>
+                                        <span class="reviewer-company amazon"><i class="fa-brands fa-amazon"></i> Amazon</span>
+                                    </figcaption>
+                                </figure>
+                            </div>
+
+
+                            <div class="carousel-item">
+                                <figure class="review">
+                                    <div class="stars">
+                                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                    </div>
+
+                                    <blockquote>
+                                        Saving jobs and applying from one place saved me hours. I landed my
+                                        first design role at Adobe before graduation.
+                                    </blockquote>
+
+                                    <figcaption>
+                                        <div class="reviewer-avatar r3">PM</div>
+                                        <div>
+                                            <strong>Priya Mehta</strong>
+                                            <small>UI / UX Design Intern</small>
+                                        </div>
+                                        <span class="reviewer-company adobe"><i class="fa-brands fa-adobe"></i> Adobe</span>
+                                    </figcaption>
+                                </figure>
+                            </div>
+
+                        </div>
+
+
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#reviews" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Story 1"></button>
+                            <button type="button" data-bs-target="#reviews" data-bs-slide-to="1" aria-label="Story 2"></button>
+                            <button type="button" data-bs-target="#reviews" data-bs-slide-to="2" aria-label="Story 3"></button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= FAQ (Bootstrap accordion) ================= -->
+
+        <section class="section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="eyebrow">FAQ</span>
+
+                    <h2>Questions students ask</h2>
+
+                    <p>
+                        Quick answers before you get started.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="accordion faq" id="faq">
+
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                            <i class="fa-solid fa-circle-question"></i>
+                            Is CareerHub free for students?
+                        </button>
+                    </h3>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faq">
+                        <div class="accordion-body">
+                            Yes. Creating a profile, searching, saving and applying to opportunities is free for every student.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            Can first-year students apply for internships?
+                        </button>
+                    </h3>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faq">
+                        <div class="accordion-body">
+                            Yes. Use the Internships filter to see roles open to beginners, and check each listing for year or skill requirements.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                            <i class="fa-solid fa-file-arrow-up"></i>
+                            What do I need to apply?
+                        </button>
+                    </h3>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faq">
+                        <div class="accordion-body">
+                            A completed profile and an up-to-date resume. Some companies also ask for a portfolio or GitHub link.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                            <i class="fa-solid fa-bell"></i>
+                            How do I track my applications?
+                        </button>
+                    </h3>
+                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faq">
+                        <div class="accordion-body">
+                            Open the Dashboard to see the status of every application, and check the bell icon for updates from companies.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= CTA ================= -->
+
+        <section class="cta">
+
+            <div>
+
+                <span class="eyebrow">READY TO START?</span>
+
+                <h2>
+                    Your next opportunity
+                    is just one search away.
+                </h2>
+
+                <p>
+                    Explore opportunities and take the next step
+                    towards your career.
+                </p>
+
+            </div>
+
+
+            <div class="cta-actions">
+
+                <a href="#" class="cta-button">
+                    Explore Opportunities
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+                <a href="#" class="cta-button ghost">
+                    <i class="fa-solid fa-file-arrow-up"></i>
+                    Upload resume
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-inner">
+
+            <div class="row g-4 text-start">
+
+                <div class="col-lg-4">
+
+                    <div class="footer-logo">
+                        <div class="logo-icon">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </div>
+
+                        <span>CareerHub</span>
+                    </div>
+
+                    <p class="footer-about">
+                        Connecting students with opportunities that shape their future.
+                    </p>
+
+                    <div class="socials">
+                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+
+                </div>
+
+
+                <div class="col-6 col-lg-2 offset-lg-1">
+                    <h4>Explore</h4>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="#">Dashboard</a>
+                        <a href="#">Jobs</a>
+                        <a href="#">Discover</a>
+                        <a href="#">Opportunities</a>
+                    </div>
+                </div>
+
+
+                <div class="col-6 col-lg-2">
+                    <h4>Support</h4>
+                    <div class="footer-links">
+                        <a href="#faq">FAQ</a>
+                        <a href="#">Help Centre</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Use</a>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-3">
+                    <h4>Job alerts</h4>
+                    <p class="footer-about">Get new roles in your inbox every week.</p>
+
+                    <form class="newsletter" action="#">
+                        <input type="email" placeholder="you@college.edu" aria-label="Email address">
+                        <button type="submit" aria-label="Subscribe"><i class="fa-solid fa-paper-plane"></i></button>
+                    </form>
+                </div>
+
+            </div>
+
+
+            <div class="copyright">
+                © 2026 CareerHub. All rights reserved.
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Back to top (plain anchor + smooth scrolling in CSS) -->
+    <a href="#top" class="back-top" aria-label="Back to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </a>
+
+
+    <!-- Bootstrap JS bundle: powers the navbar, dropdowns, alert, carousel and accordion through
+         data-bs-* attributes only. No custom JavaScript is written in this project. -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
