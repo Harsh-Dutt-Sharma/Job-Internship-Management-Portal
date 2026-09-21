@@ -1,5 +1,3 @@
-
-
 * {
     margin: 0;
     padding: 0;
@@ -11,12 +9,9 @@ body {
     background-color: #f7f9fc;
     color: #111827;
     min-height: 100vh;
-
-    /* Main page layout */
     display: grid;
     grid-template-columns: 250px 1fr;
     grid-template-rows: 80px 1fr 35px;
-
     grid-template-areas:
         "header header"
         "sidebar main"
@@ -38,7 +33,6 @@ button {
     cursor: pointer;
 }
 
-
 header {
     grid-area: header;
     background-color: #ffffff;
@@ -47,9 +41,8 @@ header {
 
 .navbar {
     width: 100%;
-    height: 80px;
+    min-height: 80px;
     padding: 0 28px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -62,21 +55,24 @@ header {
 }
 
 .text-logo {
-    width: 38px;
-    height: 38px;
-    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .text-logo img {
-    width: 100%;
-    height: 100%;
+    width: 42px;
+    height: 42px;
+    margin-bottom : 5px;
     object-fit: contain;
 }
 
 .company-name {
-    font-size: 22px;
+    margin-top: 10px;
+    font-size: 23px;
     font-weight: bold;
     color: #111827;
+    white-space: nowrap;
 }
 
 .company-name span {
@@ -84,22 +80,21 @@ header {
 }
 
 .menu-btn {
-    width: 36px;
-    height: 36px;
+    width: 42px;
+    height: 42px;
     margin-left: 65px;
-
     border: none;
     background-color: transparent;
-
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 21px;
+    color: #374151;
 }
 
-.menu-btn img {
-    width: 21px;
-    height: 21px;
-    object-fit: contain;
+.menu-btn:hover {
+    background-color: #f1f5f9;
 }
 
 .navbar-actions {
@@ -113,51 +108,45 @@ header {
 }
 
 .notification-btn {
-    width: 30px;
-    height: 30px;
-
+    width: 36px;
+    height: 36px;
     border: none;
     background-color: transparent;
-
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.notification-btn img {
-    width: 23px;
-    height: 23px;
-    object-fit: contain;
+    font-size: 21px;
+    color: #374151;
 }
 
 .notification-dot {
     position: absolute;
     top: 1px;
     right: 1px;
-
-    width: 8px;
-    height: 8px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
     background-color: #ef3340;
+    border: 2px solid #ffffff;
 }
 
 .profile {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 11px;
 }
 
 .profile-icon {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     background-color: #e8f0ff;
     color: #334155;
+    font-size: 15px;
     font-weight: bold;
 }
 
@@ -171,14 +160,11 @@ header {
     color: #64748b;
 }
 
-
-
 .sidebar {
     grid-area: sidebar;
     background-color: #ffffff;
     border-right: 1px solid #e5e7eb;
     padding: 26px 20px;
-
     display: flex;
     flex-direction: column;
 }
@@ -193,11 +179,9 @@ header {
     min-height: 49px;
     padding: 0 14px;
     border-radius: 8px;
-
     display: flex;
     align-items: center;
     gap: 15px;
-
     color: #111827;
     font-size: 14px;
 }
@@ -215,166 +199,187 @@ header {
 }
 
 .action-logo {
-    width: 22px;
-    height: 22px;
-    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
 
+.help-card {
+    margin-top: auto;
+    padding: 18px 12px;
+    background-color: #f4f8ff;
+    border: 1px solid #dce8f8;
+    border-radius: 9px;
+    text-align: center;
+}
+
+.help-icon {
+    width: 43px;
+    height: 43px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    background-color: #176fe5;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.action-logo img {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
+.help-card h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
 }
 
+.help-card p {
+    font-size: 12px;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.help-button {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 9px 14px;
+    border: 1px solid #176fe5;
+    border-radius: 5px;
+    background-color: white;
+    color: #1769d1;
+    font-size: 12px;
+    font-weight: 600;
+}
 
 .main-content {
     grid-area: main;
     min-width: 0;
     padding: 27px 30px;
-
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
     align-content: start;
+    overflow-y: auto;
 }
 
 .dashboard-heading {
     grid-column: 1 / -1;
 }
 
-.dashboard-heading h3 {
+.dashboard-heading h1 {
     font-size: 28px;
-    line-height: 1.2;
     margin-bottom: 8px;
 }
 
 .dashboard-heading p {
-    font-size: 14px;
-    color: #4b5563;
+    font-size: 16px;
+    color: #475569;
 }
-
-
 
 .summary-cards {
     grid-column: 1 / -1;
-
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 22px;
 }
 
 .summary-card {
-    min-width: 0;
     min-height: 137px;
     padding: 20px;
-
-    border: 1px solid #e5e7eb;
+    border: 1px solid #e1e7ef;
     border-radius: 10px;
-
     display: flex;
     align-items: flex-start;
-    gap: 14px;
-
+    gap: 16px;
     box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
 }
 
-.summary-card:nth-child(1) {
+.total-card {
     background-color: #f1f6ff;
 }
 
-.summary-card:nth-child(2) {
+.shortlisted-card {
     background-color: #f0fbf3;
 }
 
-.summary-card:nth-child(3) {
+.review-card {
     background-color: #fff9e9;
 }
 
-.summary-card:nth-child(4) {
+.rejected-card {
     background-color: #fff1f2;
 }
 
 .summary-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
+    width: 48px;
+    height: 48px;
     flex-shrink: 0;
-
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white;
+    font-size: 22px;
 }
 
-.summary-card:nth-child(1) .summary-icon {
+.total-card .summary-icon {
     background-color: #176fe5;
 }
 
-.summary-card:nth-child(2) .summary-icon {
+.shortlisted-card .summary-icon {
     background-color: #16a34a;
 }
 
-.summary-card:nth-child(3) .summary-icon {
+.review-card .summary-icon {
     background-color: #fbbd19;
 }
 
-.summary-card:nth-child(4) .summary-icon {
+.rejected-card .summary-icon {
     background-color: #e8323d;
 }
 
-.summary-icon img {
-    width: 23px;
-    height: 23px;
-    object-fit: contain;
-}
-
-.summary-info {
-    min-width: 0;
-}
-
 .summary-info h3 {
-    font-size: 13px;
-    margin-bottom: 7px;
-    white-space: nowrap;
+    font-size: 14px;
+    margin-bottom: 8px;
 }
 
 .summary-number {
     display: block;
-    font-size: 31px;
+    font-size: 32px;
     font-weight: bold;
-    line-height: 1;
     margin-bottom: 10px;
 }
 
-.summary-card:nth-child(1) .summary-number {
+.total-card .summary-number {
     color: #176fe5;
 }
 
-.summary-card:nth-child(2) .summary-number {
+.shortlisted-card .summary-number {
     color: #16a34a;
 }
 
-.summary-card:nth-child(3) .summary-number {
-    color: #f0a900;
+.review-card .summary-number {
+    color: #e9a500;
 }
 
-.summary-card:nth-child(4) .summary-number {
+.rejected-card .summary-number {
     color: #e8323d;
 }
 
 .summary-info p {
-    font-size: 12px;
+    font-size: 13px;
     color: #475569;
-    line-height: 1.4;
 }
 
+.dashboard-panels {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
 
 .dashboard-section {
-    min-width: 0;
-    background-color: #ffffff;
+    background-color: white;
     border: 1px solid #e5e7eb;
     border-radius: 10px;
     overflow: hidden;
@@ -384,16 +389,14 @@ header {
 .section-header {
     min-height: 53px;
     padding: 0 22px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     border-bottom: 1px solid #e5e7eb;
 }
 
 .section-header h2 {
-    font-size: 16px;
+    font-size: 17px;
 }
 
 .view-all {
@@ -402,40 +405,31 @@ header {
     font-weight: 600;
 }
 
-.view-all:hover {
-    text-decoration: underline;
-}
-
-
-
 .application-list {
-    padding: 0 22px 7px;
+    padding: 0 22px 14px;
 }
 
 .application {
-    min-height: 72px;
-    padding: 12px 0;
-
+    min-height: 64px;
+    padding: 10px 0;
     display: grid;
-    grid-template-columns: 48px minmax(0, 1fr) 100px auto;
+    grid-template-columns: 50px minmax(0, 1fr) 105px 90px;
     align-items: center;
-    gap: 12px;
-
+    column-gap: 12px;
     border-bottom: 1px solid #e5e7eb;
 }
 
 .company-logo {
-    width: 42px;
-    height: 42px;
-
+    width: 50px;
+    height: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .company-logo img {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     object-fit: contain;
 }
 
@@ -449,10 +443,10 @@ header {
     font-weight: 600;
 }
 
-.job-role p,
-.company-location {
+.job-role p {
     font-size: 12px;
     color: #475569;
+    white-space: nowrap;
 }
 
 .application-date {
@@ -463,29 +457,30 @@ header {
     color: #64748b;
 }
 
+.application-date span:last-child {
+    color: #475569;
+}
+
 .application-status {
-    padding: 7px 12px;
+    width: 90px;
+    padding: 7px 5px;
     border-radius: 20px;
-
-    background-color: #e8f8ed;
-    color: #159447;
-
     font-size: 11px;
     text-align: center;
     white-space: nowrap;
 }
 
-/* Temporary status colors based on row position.
-   Later, you can replace these with classes such as:
-   .shortlisted, .in-review and .rejected. */
+.application-status.shortlisted {
+    background-color: #e8f8ed;
+    color: #159447;
+}
 
-.application:nth-child(2) .application-status {
+.application-status.in-review {
     background-color: #fff4d9;
     color: #d58a00;
 }
 
-.application:nth-child(4) .application-status,
-.application:nth-child(5) .application-status {
+.application-status.rejected {
     background-color: #fde8eb;
     color: #d52d3a;
 }
@@ -494,38 +489,24 @@ header {
     display: block;
     margin: 14px auto 0;
     padding: 9px 15px;
-
     border: 1px solid #2878df;
     border-radius: 4px;
-
-    background-color: #ffffff;
+    background-color: white;
     color: #1769d1;
-
     font-size: 12px;
 }
-
-.applications-button:hover {
-    background-color: #eef5ff;
-}
-
-
-/* =========================================
-   8. SAVED JOBS
-========================================= */
 
 .saved-jobs-list {
     padding: 0 22px;
 }
 
 .job-card {
-    min-height: 72px;
-    padding: 12px 0;
-
+    min-height: 64px;
+    padding: 10px 0;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 105px 25px;
+    grid-template-columns: minmax(0, 1fr) 105px 30px;
     align-items: center;
     gap: 15px;
-
     border-bottom: 1px solid #e5e7eb;
 }
 
@@ -535,70 +516,50 @@ header {
 }
 
 .company-location {
-    line-height: 1.4;
+    font-size: 12px;
+    color: #475569;
 }
 
 .saved-date {
     display: flex;
     flex-direction: column;
     gap: 5px;
-
     font-size: 11px;
     color: #64748b;
 }
 
 .save-icon {
-    width: 25px;
-    height: 30px;
-
+    width: 30px;
+    height: 32px;
     border: none;
     background-color: transparent;
-
+    color: #176fe5;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 19px;
 }
-
-.save-icon img {
-    width: 18px;
-    height: 22px;
-    object-fit: contain;
-}
-
-.save-icon:hover {
-    opacity: 0.7;
-}
-
-
 
 .motivation-banner {
     grid-column: 1 / -1;
     min-height: 118px;
     padding: 10px 25px;
-
     display: grid;
-    grid-template-columns: 190px minmax(0, 1fr) auto;
+    grid-template-columns: 190px 1fr auto;
     align-items: center;
     gap: 25px;
-
     background-color: #eaf3ff;
     border-radius: 10px;
-    overflow: hidden;
-}
-
-.motivation-image {
-    align-self: end;
 }
 
 .motivation-image img {
     width: 180px;
     height: 105px;
     object-fit: contain;
-    object-position: bottom;
 }
 
 .motivation-content h2 {
-    font-size: 16px;
+    font-size: 17px;
     margin-bottom: 7px;
 }
 
@@ -610,26 +571,16 @@ header {
 .browse-jobs-button {
     padding: 12px 20px;
     border-radius: 5px;
-
     background-color: #176fe5;
-    color: #ffffff;
-
+    color: white;
     font-size: 13px;
     font-weight: 600;
-    text-align: center;
 }
-
-.browse-jobs-button:hover {
-    background-color: #125cc0;
-}
-
-
 
 .footer {
     grid-area: footer;
-    background-color: #ffffff;
+    background-color: white;
     border-top: 1px solid #e5e7eb;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -640,9 +591,6 @@ header {
     color: #475569;
 }
 
-
-
-/* Medium screens */
 @media (max-width: 1200px) {
     body {
         grid-template-columns: 220px 1fr;
@@ -653,24 +601,20 @@ header {
     }
 
     .summary-cards {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .summary-card {
-        min-height: 125px;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .application {
-        grid-template-columns: 45px minmax(0, 1fr) 90px;
-    }
-
-    .application-status {
-        grid-column: 2 / 4;
-        justify-self: start;
+        grid-template-columns: 50px minmax(0, 1fr) 100px 90px;
     }
 }
 
-/* Tablets */
+@media (max-width: 1000px) {
+    .dashboard-panels {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 850px) {
     body {
         grid-template-columns: 190px 1fr;
@@ -678,20 +622,16 @@ header {
     }
 
     .navbar {
-        height: 70px;
+        min-height: 70px;
         padding: 0 18px;
     }
 
     .company-name {
-        font-size: 19px;
+        font-size: 20px;
     }
 
     .menu-btn {
         margin-left: 25px;
-    }
-
-    .navbar-actions {
-        gap: 15px;
     }
 
     .name {
@@ -702,66 +642,27 @@ header {
         padding: 20px 12px;
     }
 
-    .sidebar-action {
-        padding: 0 10px;
-        gap: 10px;
-    }
-
     .main-content {
         padding: 20px 15px;
-        gap: 15px;
     }
 
-    .dashboard-heading h3 {
-        font-size: 24px;
-    }
-
-    .main-content {
+    .dashboard-panels {
         grid-template-columns: 1fr;
     }
 
-    .dashboard-heading,
-    .summary-cards,
-    .recent-applications,
-    .saved-jobs,
-    .motivation-banner {
-        grid-column: 1;
-    }
-
-    .motivation-banner {
-        grid-template-columns: 150px minmax(0, 1fr);
-        gap: 15px;
-    }
-
-    .browse-jobs-button {
-        grid-column: 2;
-        justify-self: start;
+    .summary-cards {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
-
 
 @media (max-width: 600px) {
     body {
         display: block;
     }
 
-    header {
-        position: relative;
-    }
-
     .navbar {
-        height: auto;
         min-height: 70px;
         padding: 12px 15px;
-    }
-
-    .company-info {
-        gap: 8px;
-    }
-
-    .text-logo {
-        width: 32px;
-        height: 32px;
     }
 
     .company-name {
@@ -769,17 +670,7 @@ header {
     }
 
     .menu-btn {
-        margin-left: 10px;
-    }
-
-    .profile-icon {
-        width: 34px;
-        height: 34px;
-        font-size: 13px;
-    }
-
-    .down-arrow {
-        display: none;
+        margin-left: 8px;
     }
 
     .sidebar {
@@ -790,13 +681,12 @@ header {
 
     .sidebar-navigation {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(2, 1fr);
         gap: 6px;
     }
 
-    .sidebar-action {
-        min-height: 42px;
-        font-size: 12px;
+    .help-card {
+        display: none;
     }
 
     .main-content {
@@ -805,22 +695,17 @@ header {
         padding: 20px 12px;
     }
 
-    .dashboard-heading h3 {
-        font-size: 23px;
-    }
-
     .summary-cards {
         grid-template-columns: 1fr;
-        gap: 12px;
     }
 
-    .summary-card {
-        min-height: 110px;
+    .dashboard-panels {
+        grid-template-columns: 1fr;
     }
 
     .application {
-        grid-template-columns: 42px minmax(0, 1fr);
-        gap: 10px;
+        grid-template-columns: 45px 1fr;
+        row-gap: 6px;
     }
 
     .application-date {
@@ -833,8 +718,7 @@ header {
     }
 
     .job-card {
-        grid-template-columns: minmax(0, 1fr) 25px;
-        gap: 10px;
+        grid-template-columns: 1fr 30px;
     }
 
     .saved-date {
@@ -855,17 +739,8 @@ header {
         padding: 20px;
     }
 
-    .motivation-image img {
-        width: 150px;
-        height: auto;
-    }
-
     .browse-jobs-button {
-        align-self: stretch;
-    }
-
-    .footer {
-        min-height: 35px;
-        padding: 10px;
+        width: 100%;
+        text-align: center;
     }
 }
