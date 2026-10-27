@@ -744,3 +744,310 @@ header {
         text-align: center;
     }
 }
+/* interactions css */
+/* Extra styles for the JavaScript features. Keep these simple and easy to edit. */
+
+/* Collapsed sidebar */
+body.small-sidebar {
+  grid-template-columns: 78px 1fr;
+}
+
+body.small-sidebar .sidebar {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+body.small-sidebar .sidebar-action {
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+  gap: 0;
+}
+
+body.small-sidebar .action-name,
+body.small-sidebar .help-card {
+  display: none;
+}
+
+/* Search and status filter above applications */
+.application-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px 22px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #fbfdff;
+}
+
+.application-filters input,
+.application-filters select {
+  padding: 9px 10px;
+  border: 1px solid #d5deea;
+  border-radius: 5px;
+  background: white;
+  font: inherit;
+  font-size: 12px;
+}
+
+.application-filters input {
+  flex: 1;
+  min-width: 150px;
+}
+
+.application-count,
+.empty-applications,
+.empty-message {
+  width: 100%;
+  margin: 8px 0;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.empty-applications,
+.empty-message {
+  padding: 18px 10px;
+  text-align: center;
+}
+
+/* Dropdown menus in the header */
+.notification,
+.profile {
+  position: relative;
+}
+
+.notification-menu,
+.profile-menu {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  z-index: 20;
+  width: 290px;
+  max-width: 85vw;
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
+  color: #111827;
+}
+
+.menu-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 13px;
+}
+
+.menu-heading button,
+.profile-menu button {
+  border: 0;
+  background: white;
+  color: #1769d1;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.notice-item {
+  padding: 12px 2px;
+  border-bottom: 1px solid #eee;
+  font-size: 12px;
+}
+
+.notice-item p,
+.notice-item small,
+.profile-menu small {
+  display: block;
+  margin-top: 4px;
+  color: #64748b;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.profile-menu {
+  width: 205px;
+}
+
+.profile-menu p {
+  padding: 5px 5px 10px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 12px;
+}
+
+.profile-menu button {
+  display: block;
+  width: 100%;
+  padding: 10px 5px;
+  color: #111827;
+  text-align: left;
+}
+
+.profile-menu button:hover {
+  background: #f1f6ff;
+}
+
+/* Popup window used by Profile, Settings, Help and Browse Jobs */
+.popup-cover {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.popup-box {
+  width: 460px;
+  max-width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 20px;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+}
+
+.popup-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding-bottom: 12px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.popup-heading h2 {
+  font-size: 19px;
+}
+
+.popup-heading button {
+  border: 0;
+  background: white;
+  color: #475569;
+  cursor: pointer;
+  font-size: 25px;
+}
+
+.popup-content p,
+.popup-content li {
+  margin-bottom: 10px;
+  color: #475569;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.popup-content ul {
+  padding-left: 20px;
+}
+
+.profile-form,
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.profile-form label {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.profile-form input {
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  font: inherit;
+}
+
+.profile-form button,
+.settings-form button,
+.browse-job-row button,
+.simple-button {
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 5px;
+  background: #176fe5;
+  color: white;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+}
+
+.settings-form label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.browse-job-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.browse-job-row h3 {
+  margin-bottom: 5px;
+  font-size: 13px;
+}
+
+.browse-job-row p {
+  margin: 0;
+  font-size: 12px;
+}
+
+.browse-job-row button:disabled {
+  background: #d1d5db;
+  cursor: default;
+}
+
+/* Small message shown after an action */
+.message-box {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  max-width: 90vw;
+  padding: 12px 15px;
+  border: 1px solid #dbe4f0;
+  border-radius: 7px;
+  background: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  color: #1f2937;
+  font-size: 13px;
+}
+
+.message-box button {
+  border: 0;
+  background: white;
+  color: #1769d1;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  body.small-sidebar .sidebar-action .action-name {
+    display: inline;
+  }
+
+  body.small-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .notification-menu,
+  .profile-menu {
+    right: -5px;
+  }
+}
