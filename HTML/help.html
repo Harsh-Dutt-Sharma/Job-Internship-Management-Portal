@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JobPortal - Help Center</title>
+  <link rel="stylesheet" href="../CSS/dashboard.css" />
+  <link rel="stylesheet" href="../CSS/help.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="top-header">
+    <nav class="navbar">
+      <div class="company-info">
+        <a href="dashboard.html" class="text-logo" aria-label="JobPortal home">
+          <img src="../images/suitcase_logo.png" alt="JobPortal logo" />
+          <span class="company-name">Job<span>Portal</span></span>
+        </a>
+
+        <button type="button" class="menu-btn" aria-label="Toggle navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+      <div class="navbar-actions">
+        <div class="notification">
+          <button type="button" class="notification-btn" aria-label="Notifications">
+            <i class="fa-regular fa-bell"></i>
+          </button>
+          <span class="notification-dot"></span>
+        </div>
+
+        <div class="profile">
+          <span class="profile-icon">IR</span>
+          <span class="name">Isha Rana</span>
+          <i class="fa-solid fa-chevron-down down-arrow"></i>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <nav class="sidebar-navigation" aria-label="Main navigation">
+      <a href="dashboard.html" class="sidebar-action" title="Dashboard">
+        <span class="action-logo">
+          <i class="fa-solid fa-table-cells-large"></i>
+        </span>
+        <span class="action-name">Dashboard</span>
+      </a>
+
+      <a href="applications.html" class="sidebar-action" title="My Applications">
+        <span class="action-logo">
+          <i class="fa-regular fa-file-lines"></i>
+        </span>
+        <span class="action-name">My Applications</span>
+      </a>
+
+      <a href="saved-jobs.html" class="sidebar-action" title="Saved Jobs">
+        <span class="action-logo">
+          <i class="fa-regular fa-bookmark"></i>
+        </span>
+        <span class="action-name">Saved Jobs</span>
+      </a>
+
+      <a href="#" class="sidebar-action" id="sidebar-alerts-btn" title="Alerts">
+        <span class="action-logo">
+          <i class="fa-regular fa-bell"></i>
+        </span>
+        <span class="action-name">Alerts</span>
+      </a>
+
+      <a href="profile.html" class="sidebar-action" title="Profile">
+        <span class="action-logo">
+          <i class="fa-regular fa-user"></i>
+        </span>
+        <span class="action-name">Profile</span>
+      </a>
+
+      <a href="settings.html" class="sidebar-action" title="Settings">
+        <span class="action-logo">
+          <i class="fa-solid fa-gear"></i>
+        </span>
+        <span class="action-name">Settings</span>
+      </a>
+
+      <a href="#" class="sidebar-action" id="sidebar-logout-btn" title="Logout">
+        <span class="action-logo">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </span>
+        <span class="action-name">Logout</span>
+      </a>
+    </nav>
+
+    <div class="help-card">
+      <div class="help-icon">
+        <i class="fa-solid fa-question"></i>
+      </div>
+
+      <h3>Need Help?</h3>
+      <p>We're here to help you.</p>
+      <p>Visit our help center or contact support.</p>
+
+      <a href="help.html" class="help-button">Visit Help Center</a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content help-page">
+    <section class="page-header">
+      <div>
+        <h1>Help Center & Support</h1>
+        <p>Find answers to common questions about JobPortal and reach out to our student support team.</p>
+      </div>
+    </section>
+
+    <!-- Support Overview Cards -->
+    <section class="help-guides-grid">
+      <div class="guide-card">
+        <div class="guide-icon"><i class="fa-regular fa-file-lines"></i></div>
+        <h3>Tracking Applications</h3>
+        <p>Monitor your progress across Shortlisted, In Review, and Rejected statuses directly in My Applications.</p>
+      </div>
+
+      <div class="guide-card">
+        <div class="guide-icon"><i class="fa-regular fa-bookmark"></i></div>
+        <h3>Saving Bookmarks</h3>
+        <p>Bookmark jobs from Browse Jobs to review later and apply with one click from Saved Jobs.</p>
+      </div>
+
+      <div class="guide-card">
+        <div class="guide-icon"><i class="fa-solid fa-user-check"></i></div>
+        <h3>Profile & Alerts</h3>
+        <p>Keep your contact details up to date so employers and status alerts reach you without delay.</p>
+      </div>
+    </section>
+
+    <div class="help-content-layout">
+      <!-- FAQ Accordion -->
+      <section class="faq-section">
+        <div class="section-title">
+          <h2>Frequently Asked Questions</h2>
+        </div>
+
+        <div class="accordion">
+          <div class="accordion-item active">
+            <button type="button" class="accordion-header">
+              <span>What do the application statuses mean?</span>
+              <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+            </button>
+            <div class="accordion-body">
+              <p><strong>In Review:</strong> Your application has been submitted and is currently being assessed by recruiters.<br>
+              <strong>Shortlisted:</strong> You have cleared initial screening rounds and are eligible for further interview rounds.<br>
+              <strong>Rejected:</strong> The position was filled or other candidates were chosen for this opening.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button type="button" class="accordion-header">
+              <span>How do I add a new job application manually?</span>
+              <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+            </button>
+            <div class="accordion-body">
+              <p>Navigate to <strong>My Applications</strong> in the left sidebar and click the <strong>+ Add Application</strong> button. Fill in the Job Role, Company Name, Location, Date, and Status, then submit.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button type="button" class="accordion-header">
+              <span>Where is my data stored?</span>
+              <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+            </button>
+            <div class="accordion-body">
+              <p>As this is a frontend web application, all your applications, bookmarked jobs, profile details, and preferences are safely stored in your browser's <code>localStorage</code>. They persist whenever you refresh or revisit the page.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button type="button" class="accordion-header">
+              <span>Can I apply to the same job twice?</span>
+              <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+            </button>
+            <div class="accordion-body">
+              <p>No, JobPortal includes built-in duplicate check logic to prevent you from accidentally submitting multiple applications for the exact same job role and company.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Support Form -->
+      <section class="contact-section">
+        <div class="section-title">
+          <h2>Contact Support</h2>
+        </div>
+
+        <div class="contact-card">
+          <form id="help-contact-form">
+            <div class="form-group">
+              <label class="form-label" for="contact-name">Full Name *</label>
+              <input type="text" id="contact-name" class="form-input" placeholder="Your name" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contact-email">Email Address *</label>
+              <input type="email" id="contact-email" class="form-input" placeholder="Your email address" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contact-subject">Subject / Inquiry Type *</label>
+              <select id="contact-subject" class="form-select" required>
+                <option value="Application Issue">Application Tracking Issue</option>
+                <option value="Profile Assistance">Profile Management Help</option>
+                <option value="Feature Feedback">Feature Suggestion & Feedback</option>
+                <option value="Other">Other Query</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contact-message">Your Message *</label>
+              <textarea id="contact-message" class="form-textarea" placeholder="Describe your question or issue in detail..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+              <i class="fa-solid fa-paper-plane"></i> Send Support Inquiry
+            </button>
+
+            <p class="demo-disclaimer" style="margin-top: 12px; font-size: 11px; color: #64748b; text-align: center;">
+              Note: In this front-end demo, simulated receipt is confirmed instantly without sending an actual email.
+            </p>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 JobPortal. All rights reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../JavaScript/common.js"></script>
+  <script src="../JavaScript/help.js"></script>
+</body>
+</html>
+

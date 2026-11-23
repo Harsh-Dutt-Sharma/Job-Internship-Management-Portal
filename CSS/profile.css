@@ -1,0 +1,147 @@
+/* ==========================================================================
+   JobPortal - User Profile CSS (profile.css)
+   ========================================================================== */
+
+.profile-page {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.profile-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.profile-overview-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 28px 22px;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.profile-avatar-large {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #e8f0ff;
+    color: #1769d1;
+    font-size: 28px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    border: 3px solid #cce0ff;
+}
+
+.profile-overview-card h2 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #111827;
+    margin-bottom: 4px;
+}
+
+.profile-headline {
+    font-size: 13px;
+    color: #475569;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.profile-location {
+    font-size: 13px;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.profile-location i {
+    color: #176fe5;
+}
+
+.profile-contact-info {
+    width: 100%;
+    padding: 16px 0;
+    border-top: 1px solid #f1f5f9;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+}
+
+.contact-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: #374151;
+}
+
+.contact-row i {
+    color: #94a3b8;
+    width: 16px;
+}
+
+.profile-skills-section {
+    width: 100%;
+    padding-top: 18px;
+    text-align: left;
+}
+
+.profile-skills-section h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 10px;
+}
+
+.skills-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.skill-tag {
+    background-color: #f1f5f9;
+    color: #334155;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.profile-form-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+@media (max-width: 900px) {
+    .profile-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
