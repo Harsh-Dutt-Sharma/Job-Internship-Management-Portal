@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JobPortal - User Profile</title>
+  <link rel="stylesheet" href="../CSS/dashboard.css" />
+  <link rel="stylesheet" href="../CSS/profile.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="top-header">
+    <nav class="navbar">
+      <div class="company-info">
+        <a href="dashboard.html" class="text-logo" aria-label="JobPortal home">
+          <img src="../images/suitcase_logo.png" alt="JobPortal logo" />
+          <span class="company-name">Job<span>Portal</span></span>
+        </a>
+
+        <button type="button" class="menu-btn" aria-label="Toggle navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+      <div class="navbar-actions">
+        <div class="notification">
+          <button type="button" class="notification-btn" aria-label="Notifications">
+            <i class="fa-regular fa-bell"></i>
+          </button>
+          <span class="notification-dot"></span>
+        </div>
+
+        <div class="profile">
+          <span class="profile-icon">IR</span>
+          <span class="name">Isha Rana</span>
+          <i class="fa-solid fa-chevron-down down-arrow"></i>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <nav class="sidebar-navigation" aria-label="Main navigation">
+      <a href="dashboard.html" class="sidebar-action" title="Dashboard">
+        <span class="action-logo">
+          <i class="fa-solid fa-table-cells-large"></i>
+        </span>
+        <span class="action-name">Dashboard</span>
+      </a>
+
+      <a href="applications.html" class="sidebar-action" title="My Applications">
+        <span class="action-logo">
+          <i class="fa-regular fa-file-lines"></i>
+        </span>
+        <span class="action-name">My Applications</span>
+      </a>
+
+      <a href="saved-jobs.html" class="sidebar-action" title="Saved Jobs">
+        <span class="action-logo">
+          <i class="fa-regular fa-bookmark"></i>
+        </span>
+        <span class="action-name">Saved Jobs</span>
+      </a>
+
+      <a href="#" class="sidebar-action" id="sidebar-alerts-btn" title="Alerts">
+        <span class="action-logo">
+          <i class="fa-regular fa-bell"></i>
+        </span>
+        <span class="action-name">Alerts</span>
+      </a>
+
+      <a href="profile.html" class="sidebar-action active" title="Profile">
+        <span class="action-logo">
+          <i class="fa-regular fa-user"></i>
+        </span>
+        <span class="action-name">Profile</span>
+      </a>
+
+      <a href="settings.html" class="sidebar-action" title="Settings">
+        <span class="action-logo">
+          <i class="fa-solid fa-gear"></i>
+        </span>
+        <span class="action-name">Settings</span>
+      </a>
+
+      <a href="#" class="sidebar-action" id="sidebar-logout-btn" title="Logout">
+        <span class="action-logo">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </span>
+        <span class="action-name">Logout</span>
+      </a>
+    </nav>
+
+    <div class="help-card">
+      <div class="help-icon">
+        <i class="fa-solid fa-question"></i>
+      </div>
+
+      <h3>Need Help?</h3>
+      <p>We're here to help you.</p>
+      <p>Visit our help center or contact support.</p>
+
+      <a href="help.html" class="help-button">Visit Help Center</a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content profile-page">
+    <section class="page-header">
+      <div>
+        <h1>My Profile</h1>
+        <p>View and manage your student profile information and preferences.</p>
+      </div>
+    </section>
+
+    <div class="profile-layout">
+      <!-- Profile Overview Card -->
+      <section class="profile-overview-card">
+        <div class="profile-avatar-large" id="avatar-large">IR</div>
+        <h2 id="view-name">Isha Rana</h2>
+        <p class="profile-headline" id="view-headline">Aspiring Frontend Developer & CS Student</p>
+        <p class="profile-location" id="view-location"><i class="fa-solid fa-location-dot"></i> Bengaluru, India</p>
+
+        <div class="profile-contact-info">
+          <div class="contact-row">
+            <i class="fa-regular fa-envelope"></i>
+            <span id="view-email">isha.rana@example.com</span>
+          </div>
+          <div class="contact-row">
+            <i class="fa-solid fa-phone"></i>
+            <span id="view-phone">+91 98765 43210</span>
+          </div>
+        </div>
+
+        <div class="profile-skills-section">
+          <h4>Key Skills</h4>
+          <div class="skills-tags" id="skills-tags-container">
+            <!-- Rendered by profile.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Profile Edit Form -->
+      <section class="profile-form-card" id="edit-profile-section">
+        <div class="section-header" style="border-bottom: 1px solid #e5e7eb; padding-bottom: 12px; margin-bottom: 20px;">
+          <h2>Edit Profile Details</h2>
+        </div>
+
+        <form id="profile-edit-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="profile-name">Full Name *</label>
+              <input type="text" id="profile-name" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="profile-email">Email Address *</label>
+              <input type="email" id="profile-email" class="form-input" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="profile-phone">Phone Number *</label>
+              <input type="text" id="profile-phone" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="profile-location-input">Location *</label>
+              <input type="text" id="profile-location-input" class="form-input" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="profile-headline-input">Professional Headline</label>
+            <input type="text" id="profile-headline-input" class="form-input" placeholder="e.g. Frontend Developer Intern | B.Tech CSE" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="profile-skills">Skills (comma-separated)</label>
+            <input type="text" id="profile-skills" class="form-input" placeholder="e.g. HTML5, CSS3, JavaScript, React, Git" />
+          </div>
+
+          <div class="form-actions" style="margin-top: 24px; display: flex; justify-content: flex-end; gap: 12px;">
+            <button type="submit" class="btn btn-primary">
+              <i class="fa-solid fa-floppy-disk"></i> Save Profile
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 JobPortal. All rights reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../JavaScript/common.js"></script>
+  <script src="../JavaScript/profile.js"></script>
+</body>
+</html>
+

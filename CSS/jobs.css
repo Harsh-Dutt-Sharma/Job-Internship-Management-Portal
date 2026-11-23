@@ -1,0 +1,157 @@
+/* ==========================================================================
+   JobPortal - Browse Jobs CSS (jobs.css)
+   ========================================================================== */
+
+.jobs-page {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.header-stat span {
+    background-color: #eaf2ff;
+    color: #1769d1;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid #cce0ff;
+}
+
+.browse-jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.job-listing-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 22px;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.job-listing-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(15, 23, 42, 0.08);
+}
+
+.job-listing-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.job-listing-logo {
+    width: 48px;
+    height: 48px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    padding: 4px;
+    flex-shrink: 0;
+}
+
+.job-listing-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.job-listing-details {
+    flex: 1;
+}
+
+.job-listing-details h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 4px;
+}
+
+.job-listing-details p {
+    font-size: 13px;
+    color: #475569;
+}
+
+.job-listing-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    color: #64748b;
+    flex-wrap: wrap;
+}
+
+.badge-job-type {
+    background-color: #f1f5f9;
+    color: #334155;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.badge-salary {
+    color: #16a34a;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.job-listing-desc {
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.5;
+}
+
+.job-listing-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid #f1f5f9;
+    gap: 12px;
+}
+
+.btn-bookmark-action {
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+    color: #374151;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s;
+}
+
+.btn-bookmark-action:hover {
+    background: #f8fafc;
+    border-color: #94a3b8;
+}
+
+.btn-bookmark-action.saved {
+    background-color: #eaf2ff;
+    color: #1769d1;
+    border-color: #176fe5;
+}
+
+@media (max-width: 950px) {
+    .browse-jobs-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
