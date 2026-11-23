@@ -1,8 +1,5 @@
-// JobPortal dashboard JavaScript
-// Beginner-friendly version using basic DOM methods and event listeners.
-
 document.addEventListener("DOMContentLoaded", function () {
-  // Get elements from the page
+  // Using DOM to retrieve the elements of the web-page.
   const menuButton = document.querySelector(".menu-btn");
   const notificationButton = document.querySelector(".notification-btn");
   const notificationArea = document.querySelector(".notification");
@@ -12,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const applicationSection = document.querySelector(".recent-applications");
   const sidebarLinks = document.querySelectorAll(".sidebar-action");
 
-  // Small helper to show a message at the bottom of the page
+  //Helper Message
   function showMessage(message, undoFunction) {
     const oldMessage = document.querySelector(".message-box");
     if (oldMessage) oldMessage.remove();
@@ -40,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 4000);
   }
 
-  // Create a simple popup window
+  // Simple popup window
   function openPopup(title, content) {
     closePopup();
 
