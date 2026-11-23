@@ -38,63 +38,76 @@
 
         <form>
 
-            <label>Full Name</label>
+            <label for="fullname">Full Name</label>
             <input
                 type="text"
+                id="fullname"
                 placeholder="Enter your full name"
                 required
             >
 
-            <label>Email</label>
+            <label for="email">Email</label>
             <input
                 type="email"
+                id="email"
                 placeholder="Enter your email"
                 required
             >
 
-            <label>Phone Number</label>
+            <label for="phone">Phone Number</label>
             <input
                 type="tel"
+                id="phone"
                 placeholder="Enter your phone number"
                 required
             >
 
-            <label>College / University</label>
+            <label for="college">College / University</label>
             <input
                 type="text"
+                id="college"
                 placeholder="Enter your college name"
                 required
             >
 
-            <label>Course</label>
+            <label for="course">Course</label>
             <input
                 type="text"
+                id="course"
                 placeholder="e.g. B.Tech CSE"
                 required
             >
 
-            <label>CGPA</label>
+            <label for="cgpa">CGPA</label>
             <input
-                type="text"
-                placeholder="Enter your CGPA"
+                    type="number"
+                    id="cgpa"
+                    name="cgpa"
+                    placeholder="Enter your CGPA"
+                     min="0"
+                    max="10"
+                     step="0.01"
+                    required
             >
 
-            <label>Skills</label>
+            <label for="skills">Skills</label>
             <input
                 type="text"
+                id="skills"
                 placeholder="e.g. Java, Python, React"
             >
 
-            <label>Resume</label>
+            <label for="resume">Resume</label>
             <input
                 type="file"
+                id="resume"
                 accept=".pdf"
                 required
             >
 
-            <label>Cover Letter</label>
-
+            <label for="cover-letter">Cover Letter</label>
             <textarea
+                id="cover-letter"
                 rows="5"
                 placeholder="Write something about yourself..."
             ></textarea>
@@ -109,6 +122,6 @@
         </form>
 
     </div>
-
+<script src="../JavaScript/applyjs.js"></script>
 </body>
 </html>
