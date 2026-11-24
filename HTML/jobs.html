@@ -381,5 +381,66 @@
   </main>
 </div>
 
+<script>
+const cards = [...document.querySelectorAll('.job-card')];
+const searchInput = document.getElementById('searchInput');
+const locationSelect = document.getElementById('locationSelect');
+const experienceSelect = document.getElementById('experienceSelect');
+const searchBtn = document.getElementById('searchBtn');
+const jobList = document.getElementById('jobList');
+const resultsCount = document.getElementById('resultsCount');
+
+/* ---------- SEARCH + LOCATION + EXPERIENCE ---------- */
+function applyFilters() {
+  const q = searchInput.value.trim().toLowerCase();
+  const loc = locationSelect.value;
+  const exp = experienceSelect.value;
+  let visible = 0;
+
+  cards.forEach(card => {
+    const d = card.dataset;
+    const text = `${d.title} ${d.company} ${d.skills}`.toLowerCase();
+
+    const matchText = !q || text.includes(q);
+    const matchLoc = !loc || d.location === loc;
+    const matchExp = !exp || d.experience === exp;
+
+    const show = matchText && matchLoc && matchExp;
+    card.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+
+  // "no results" message
+  let msg = document.getElementById('noResults');
+  if (visible === 0 && !msg) {
+    msg = document.createElement('div');
+    msg.id = 'noResults';
+    msg.className = 'no-results';
+    msg.textContent = 'No opportunities match your search.';
+    jobList.after(msg);
+  } else if (visible > 0 && msg) {
+    msg.remove();
+  }
+
+  resultsCount.textContent = `Showing ${visible} of ${cards.length} results`;
+}
+
+searchBtn.addEventListener('click', applyFilters);
+searchInput.addEventListener('input', applyFilters);
+searchInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') applyFilters();
+});
+locationSelect.addEventListener('change', applyFilters);
+experienceSelect.addEventListener('change', applyFilters);
+
+/* ---------- VIEW DETAILS BUTTONS ---------- */
+document.querySelectorAll('.job-card .btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const { company, title, location: loc, experience } = btn.closest('.job-card').dataset;
+    const params = new URLSearchParams({ company, title, location: loc, experience });
+    window.location.href = `job-details.html?${params.toString()}`;
+  });
+});
+</script>
 </body>
 </html>
