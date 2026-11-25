@@ -542,9 +542,20 @@ document.addEventListener("DOMContentLoaded", function() {
   highlightActiveNavLink();
 });
 
-// Sync profile data to header elements
-function syncHeaderProfile() {
-  const profile = getProfile();
+// Sync profile data to header elements (supports REST API with localStorage fallback)
+async function syncHeaderProfile() {
+  let profile = null;
+  if (window.API && typeof window.API.getProfile === "function") {
+    try {
+      profile = await window.API.getProfile();
+    } catch (err) {
+      console.warn("API getProfile failed, using fallback:", err);
+    }
+  }
+  if (!profile) {
+    profile = getProfile();
+  }
+
   const nameEl = document.querySelector(".navbar-actions .profile .name");
   const iconEl = document.querySelector(".navbar-actions .profile .profile-icon");
   const headingWelcome = document.querySelector(".dashboard-heading p");
@@ -632,7 +643,7 @@ function setupSidebar() {
   });
 }
 
-// Setup Notification Dropdown
+// Setup Notification Dropdown (supports REST API with fallback)
 function setupNotifications() {
   const notifContainer = document.querySelector(".notification");
   if (!notifContainer) return;
@@ -649,8 +660,22 @@ function setupNotifications() {
   }
 
   // Function to render notifications
-  function renderNotifications() {
-    const notifications = getNotifications();
+  async function renderNotifications() {
+    let notifications = [];
+    if (window.API && typeof window.API.getNotifications === "function") {
+      try {
+        const apiNotifs = await window.API.getNotifications();
+        if (Array.isArray(apiNotifs) && apiNotifs.length > 0) {
+          notifications = apiNotifs;
+        }
+      } catch (err) {
+        console.warn("API getNotifications failed:", err);
+      }
+    }
+    if (notifications.length === 0) {
+      notifications = getNotifications();
+    }
+
     const unreadCount = notifications.filter(n => !n.read).length;
 
     // Show/hide red dot
@@ -691,12 +716,22 @@ function setupNotifications() {
     // Wire up "Mark all as read"
     const markAllBtn = dropdown.querySelector("#mark-all-read");
     if (markAllBtn) {
-      markAllBtn.addEventListener("click", function(e) {
+      markAllBtn.addEventListener("click", async function(e) {
         e.stopPropagation();
+        if (window.API && typeof window.API.markNotificationAsRead === "function") {
+          try {
+            const unreadItems = notifications.filter(n => !n.read);
+            for (const item of unreadItems) {
+              await window.API.markNotificationAsRead(item.id);
+            }
+          } catch (err) {
+            console.warn("API mark read error:", err);
+          }
+        }
         const notifs = getNotifications();
         notifs.forEach(n => n.read = true);
         saveNotifications(notifs);
-        renderNotifications();
+        await renderNotifications();
         showToast("All notifications marked as read", "success");
       });
     }
@@ -704,15 +739,22 @@ function setupNotifications() {
     // Wire up clicking individual notification
     const itemEls = dropdown.querySelectorAll(".notification-item.unread");
     itemEls.forEach(el => {
-      el.addEventListener("click", function() {
+      el.addEventListener("click", async function() {
         const id = parseInt(this.getAttribute("data-id"));
+        if (window.API && typeof window.API.markNotificationAsRead === "function") {
+          try {
+            await window.API.markNotificationAsRead(id);
+          } catch (err) {
+            console.warn("API markNotificationAsRead error:", err);
+          }
+        }
         const notifs = getNotifications();
         const target = notifs.find(n => n.id === id);
         if (target) {
           target.read = true;
           saveNotifications(notifs);
-          renderNotifications();
         }
+        await renderNotifications();
       });
     });
   }
@@ -728,6 +770,7 @@ function setupNotifications() {
       const profileDropdown = document.querySelector(".profile-dropdown");
       if (profileDropdown) profileDropdown.classList.remove("show");
 
+      renderNotifications();
       dropdown.classList.toggle("show");
     });
   }
@@ -755,8 +798,19 @@ function setupProfileDropdown() {
     profileContainer.parentNode.appendChild(dropdown);
   }
 
-  function renderProfileMenu() {
-    const profile = getProfile();
+  async function renderProfileMenu() {
+    let profile = null;
+    if (window.API && typeof window.API.getProfile === "function") {
+      try {
+        profile = await window.API.getProfile();
+      } catch (err) {
+        console.warn("API profile fetch failed:", err);
+      }
+    }
+    if (!profile) {
+      profile = getProfile();
+    }
+
     dropdown.innerHTML = `
       <div class="profile-dropdown-header">
         <div class="profile-dropdown-avatar">${profile.initials || 'IR'}</div>

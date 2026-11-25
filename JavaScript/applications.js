@@ -1,12 +1,13 @@
 /* ==========================================================================
    JobPortal - Applications JavaScript (applications.js)
    Handles:
+   - REST API integration with JSON Server (http://localhost:3000/applications)
    - Search by job title or company
    - Filter by status (All, Shortlisted, In Review, Rejected)
-   - Dynamic application counts update
-   - Add new application with validation & instant display
-   - Edit application modal & update
-   - Delete application with confirmation modal
+   - Dynamic application counts update from API
+   - Add new application with API POST & instant display
+   - Edit application modal & API PATCH
+   - Delete application with API DELETE & confirmation modal
    - View application details modal
    - Empty state rendering
    - Pre-selection from URL query parameter (e.g. ?status=Shortlisted)
@@ -15,12 +16,9 @@
 let currentSearchQuery = "";
 let currentStatusFilter = "all";
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
   // Check URL query parameters for filter
   readUrlQueryParams();
-
-  // Update counts
-  updateCounts();
 
   // Setup search input listeners
   setupSearch();
@@ -34,8 +32,9 @@ document.addEventListener("DOMContentLoaded", function() {
   // Setup Add Application button
   setupAddApplicationButton();
 
-  // Render initial list
-  renderApplicationsList();
+  // Initial load: counts and list from API
+  await updateCounts();
+  await renderApplicationsList();
 });
 
 // Check if ?status=... is passed in the URL
@@ -53,19 +52,34 @@ function readUrlQueryParams() {
   }
 }
 
-// Update top metric counts from localStorage data
-function updateCounts() {
-  const applications = getApplications();
+// Update top metric counts from API
+async function updateCounts() {
+  let applications = [];
+  try {
+    if (window.API && typeof API.getApplications === "function") {
+      applications = await API.getApplications();
+    } else {
+      applications = getApplications();
+    }
+  } catch (error) {
+    console.warn("Falling back to local applications for counts:", error);
+    applications = getApplications();
+  }
 
   const total = applications.length;
   const shortlisted = applications.filter(a => a.status === "Shortlisted").length;
   const inReview = applications.filter(a => a.status === "In Review").length;
   const rejected = applications.filter(a => a.status === "Rejected").length;
 
-  document.getElementById("metric-total-count").textContent = total;
-  document.getElementById("metric-shortlisted-count").textContent = shortlisted;
-  document.getElementById("metric-review-count").textContent = inReview;
-  document.getElementById("metric-rejected-count").textContent = rejected;
+  const totalEl = document.getElementById("metric-total-count");
+  const shortlistedEl = document.getElementById("metric-shortlisted-count");
+  const reviewEl = document.getElementById("metric-review-count");
+  const rejectedEl = document.getElementById("metric-rejected-count");
+
+  if (totalEl) totalEl.textContent = total;
+  if (shortlistedEl) shortlistedEl.textContent = shortlisted;
+  if (reviewEl) reviewEl.textContent = inReview;
+  if (rejectedEl) rejectedEl.textContent = rejected;
 }
 
 // Setup search bar
@@ -135,12 +149,29 @@ function highlightActiveMetricCard(filter) {
   });
 }
 
-// Render the application list based on search and status filters
-function renderApplicationsList() {
+// Render the application list from API based on search and status filters
+async function renderApplicationsList() {
   const container = document.getElementById("applications-list");
   if (!container) return;
 
-  const applications = getApplications();
+  container.innerHTML = `
+    <div style="padding: 40px 20px; text-align: center; color: #64748b;">
+      <i class="fa-solid fa-spinner fa-spin fa-2x"></i>
+      <p style="margin-top: 10px;">Loading applications from server...</p>
+    </div>
+  `;
+
+  let applications = [];
+  try {
+    if (window.API && typeof API.getApplications === "function") {
+      applications = await API.getApplications();
+    } else {
+      applications = getApplications();
+    }
+  } catch (error) {
+    console.error("Error fetching applications:", error);
+    applications = getApplications();
+  }
 
   // Filter by status
   let filtered = applications;
@@ -151,8 +182,8 @@ function renderApplicationsList() {
   // Filter by search query
   if (currentSearchQuery) {
     filtered = filtered.filter(app => {
-      const roleMatch = app.role.toLowerCase().includes(currentSearchQuery);
-      const companyMatch = app.company.toLowerCase().includes(currentSearchQuery);
+      const roleMatch = app.role && app.role.toLowerCase().includes(currentSearchQuery);
+      const companyMatch = app.company && app.company.toLowerCase().includes(currentSearchQuery);
       const locationMatch = app.location && app.location.toLowerCase().includes(currentSearchQuery);
       return roleMatch || companyMatch || locationMatch;
     });
@@ -243,7 +274,7 @@ function attachRowActionListeners(container) {
   const viewBtns = container.querySelectorAll(".btn-view");
   viewBtns.forEach(btn => {
     btn.addEventListener("click", function() {
-      const id = parseInt(this.getAttribute("data-id"));
+      const id = this.getAttribute("data-id");
       openViewDetailsModal(id);
     });
   });
@@ -252,7 +283,7 @@ function attachRowActionListeners(container) {
   const editBtns = container.querySelectorAll(".btn-edit");
   editBtns.forEach(btn => {
     btn.addEventListener("click", function() {
-      const id = parseInt(this.getAttribute("data-id"));
+      const id = this.getAttribute("data-id");
       openEditModal(id);
     });
   });
@@ -261,13 +292,13 @@ function attachRowActionListeners(container) {
   const deleteBtns = container.querySelectorAll(".btn-delete");
   deleteBtns.forEach(btn => {
     btn.addEventListener("click", function() {
-      const id = parseInt(this.getAttribute("data-id"));
+      const id = this.getAttribute("data-id");
       openDeleteConfirmationModal(id);
     });
   });
 }
 
-// --- ADD APPLICATION MODAL & SUBMISSION ---
+// --- ADD APPLICATION MODAL & SUBMISSION (POST) ---
 
 function setupAddApplicationButton() {
   const addBtn = document.getElementById("open-add-modal-btn");
@@ -335,7 +366,7 @@ function openAddApplicationModal() {
 
         <div class="modal-actions">
           <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-          <button type="submit" class="btn btn-primary">Add Application</button>
+          <button type="submit" class="btn btn-primary" id="btn-submit-add">Add Application</button>
         </div>
       </form>
     </div>
@@ -343,10 +374,10 @@ function openAddApplicationModal() {
 
   openModal(modalHtml);
 
-  // Handle form submission
+  // Handle form submission with API POST
   const form = document.getElementById("add-application-form");
   if (form) {
-    form.addEventListener("submit", function(e) {
+    form.addEventListener("submit", async function(e) {
       e.preventDefault();
 
       const role = document.getElementById("new-role").value.trim();
@@ -356,17 +387,18 @@ function openAddApplicationModal() {
       const status = document.getElementById("new-status").value;
       const notes = document.getElementById("new-notes").value.trim();
 
-      // Basic validation
       if (!role || !company || !location || !date) {
         showToast("Please fill in all required fields.", "error");
         return;
       }
 
-      const applications = getApplications();
+      const submitBtn = document.getElementById("btn-submit-add");
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+      }
 
-      // Create new application object
       const newApp = {
-        id: Date.now(),
         role: role,
         company: company,
         location: location,
@@ -375,27 +407,49 @@ function openAddApplicationModal() {
         notes: notes || "Application submitted. Awaiting employer review."
       };
 
-      // Add to beginning of array
-      applications.unshift(newApp);
-      saveApplications(applications);
+      try {
+        if (window.API && typeof API.addApplication === "function") {
+          await API.addApplication(newApp);
+        } else {
+          const apps = getApplications();
+          newApp.id = Date.now();
+          apps.unshift(newApp);
+          saveApplications(apps);
+        }
 
-      // Close modal
-      closeModal();
-
-      // Update counts & refresh listing
-      updateCounts();
-      renderApplicationsList();
-
-      showToast(`Application for ${role} at ${company} added successfully!`, "success");
+        closeModal();
+        showToast(`Application for ${role} at ${company} added successfully!`, "success");
+        await updateCounts();
+        await renderApplicationsList();
+      } catch (error) {
+        console.error("Error adding application:", error);
+        showToast("Failed to save application to server. Please try again.", "error");
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "Add Application";
+        }
+      }
     });
   }
 }
 
-// --- EDIT APPLICATION MODAL ---
+// --- EDIT APPLICATION MODAL & SUBMISSION (PATCH) ---
 
-function openEditModal(appId) {
-  const applications = getApplications();
-  const app = applications.find(a => a.id === appId);
+async function openEditModal(appId) {
+  let app = null;
+  try {
+    if (window.API && typeof API.getApplicationById === "function") {
+      app = await API.getApplicationById(appId);
+    }
+  } catch (err) {
+    console.warn("Could not fetch application by ID:", err);
+  }
+
+  if (!app) {
+    const apps = (window.API ? await API.getApplications() : null) || getApplications();
+    app = apps.find(a => a.id == appId);
+  }
+
   if (!app) return;
 
   const modalHtml = `
@@ -445,7 +499,7 @@ function openEditModal(appId) {
 
         <div class="modal-actions">
           <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-          <button type="submit" class="btn btn-primary">Save Changes</button>
+          <button type="submit" class="btn btn-primary" id="btn-submit-edit">Save Changes</button>
         </div>
       </form>
     </div>
@@ -455,7 +509,7 @@ function openEditModal(appId) {
 
   const form = document.getElementById("edit-application-form");
   if (form) {
-    form.addEventListener("submit", function(e) {
+    form.addEventListener("submit", async function(e) {
       e.preventDefault();
 
       const role = document.getElementById("edit-role").value.trim();
@@ -470,33 +524,66 @@ function openEditModal(appId) {
         return;
       }
 
-      // Update item in array
-      const allApps = getApplications();
-      const targetIndex = allApps.findIndex(a => a.id === appId);
-      if (targetIndex !== -1) {
-        allApps[targetIndex].role = role;
-        allApps[targetIndex].company = company;
-        allApps[targetIndex].location = location;
-        allApps[targetIndex].date = date;
-        allApps[targetIndex].status = status;
-        allApps[targetIndex].notes = notes;
-
-        saveApplications(allApps);
+      const submitBtn = document.getElementById("btn-submit-edit");
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
       }
 
-      closeModal();
-      updateCounts();
-      renderApplicationsList();
-      showToast("Application updated successfully!", "success");
+      const updatedData = {
+        role: role,
+        company: company,
+        location: location,
+        date: date,
+        status: status,
+        notes: notes
+      };
+
+      try {
+        if (window.API && typeof API.updateApplication === "function") {
+          await API.updateApplication(appId, updatedData);
+        } else {
+          const allApps = getApplications();
+          const targetIndex = allApps.findIndex(a => a.id == appId);
+          if (targetIndex !== -1) {
+            allApps[targetIndex] = { ...allApps[targetIndex], ...updatedData };
+            saveApplications(allApps);
+          }
+        }
+
+        closeModal();
+        showToast("Application updated successfully!", "success");
+        await updateCounts();
+        await renderApplicationsList();
+      } catch (error) {
+        console.error("Error updating application:", error);
+        showToast("Failed to update application on server.", "error");
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "Save Changes";
+        }
+      }
     });
   }
 }
 
-// --- DELETE APPLICATION CONFIRMATION ---
+// --- DELETE APPLICATION CONFIRMATION (DELETE) ---
 
-function openDeleteConfirmationModal(appId) {
-  const applications = getApplications();
-  const app = applications.find(a => a.id === appId);
+async function openDeleteConfirmationModal(appId) {
+  let app = null;
+  try {
+    if (window.API && typeof API.getApplicationById === "function") {
+      app = await API.getApplicationById(appId);
+    }
+  } catch (err) {
+    console.warn(err);
+  }
+
+  if (!app) {
+    const apps = (window.API ? await API.getApplications() : null) || getApplications();
+    app = apps.find(a => a.id == appId);
+  }
+
   if (!app) return;
 
   const modalHtml = `
@@ -507,7 +594,7 @@ function openDeleteConfirmationModal(appId) {
       </div>
       <div class="modal-body">
         <p>Are you sure you want to delete your application for <strong>${app.role}</strong> at <strong>${app.company}</strong>?</p>
-        <p class="modal-subtitle">This action cannot be undone. The entry will be removed from your applications list.</p>
+        <p class="modal-subtitle">This action cannot be undone. The entry will be permanently removed from the server database.</p>
       </div>
       <div class="modal-actions">
         <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
@@ -520,24 +607,50 @@ function openDeleteConfirmationModal(appId) {
 
   const confirmDeleteBtn = document.getElementById("confirm-delete-btn");
   if (confirmDeleteBtn) {
-    confirmDeleteBtn.addEventListener("click", function() {
-      let allApps = getApplications();
-      allApps = allApps.filter(a => a.id !== appId);
-      saveApplications(allApps);
+    confirmDeleteBtn.addEventListener("click", async function() {
+      confirmDeleteBtn.disabled = true;
+      confirmDeleteBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Deleting...';
 
-      closeModal();
-      updateCounts();
-      renderApplicationsList();
-      showToast("Application deleted.", "info");
+      try {
+        if (window.API && typeof API.deleteApplication === "function") {
+          await API.deleteApplication(appId);
+        } else {
+          let allApps = getApplications();
+          allApps = allApps.filter(a => a.id != appId);
+          saveApplications(allApps);
+        }
+
+        closeModal();
+        showToast("Application deleted.", "info");
+        await updateCounts();
+        await renderApplicationsList();
+      } catch (error) {
+        console.error("Error deleting application:", error);
+        showToast("Failed to delete application from server.", "error");
+        confirmDeleteBtn.disabled = false;
+        confirmDeleteBtn.innerHTML = "Delete";
+      }
     });
   }
 }
 
 // --- VIEW DETAILS MODAL ---
 
-function openViewDetailsModal(appId) {
-  const applications = getApplications();
-  const app = applications.find(a => a.id === appId);
+async function openViewDetailsModal(appId) {
+  let app = null;
+  try {
+    if (window.API && typeof API.getApplicationById === "function") {
+      app = await API.getApplicationById(appId);
+    }
+  } catch (err) {
+    console.warn(err);
+  }
+
+  if (!app) {
+    const apps = (window.API ? await API.getApplications() : null) || getApplications();
+    app = apps.find(a => a.id == appId);
+  }
+
   if (!app) return;
 
   const logoSrc = getCompanyLogo(app.company);
@@ -589,7 +702,7 @@ function openViewDetailsModal(appId) {
         </div>
       </div>
       <div class="modal-actions">
-        <button type="button" class="btn btn-secondary" onclick="openEditModal(${app.id})"><i class="fa-solid fa-pen"></i> Edit</button>
+        <button type="button" class="btn btn-secondary" onclick="openEditModal('${app.id}')"><i class="fa-solid fa-pen"></i> Edit</button>
         <button type="button" class="btn btn-primary" onclick="closeModal()">Close</button>
       </div>
     </div>
@@ -597,4 +710,3 @@ function openViewDetailsModal(appId) {
 
   openModal(modalHtml);
 }
-

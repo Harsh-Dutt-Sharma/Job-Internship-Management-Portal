@@ -39,10 +39,24 @@
             </ul>
         </div>
         <h3><b>Stipend:</b>50000Rs+HRA+DA</h3>
-        <a href="apply.html" class="btn-apply-small">Apply Now</a>
+        <a href="apply.html?jobId=1" class="btn-apply-small">Apply Now</a>
     </div>
     <footer class="footer-simple">
   <p>&copy; 2026 Google India. All rights reserved.</p>
 </footer>
+<script src="../JavaScript/api.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", async function() {
+    try {
+      if (window.API) {
+        const job = await API.getJobById(1);
+        if (job && job.stipend) {
+          const stipendEl = document.querySelector(".container h3");
+          if (stipendEl) stipendEl.innerHTML = `<b>Stipend: </b>${job.stipend}`;
+        }
+      }
+    } catch(e) { console.warn(e); }
+  });
+</script>
 </body>
 </html>

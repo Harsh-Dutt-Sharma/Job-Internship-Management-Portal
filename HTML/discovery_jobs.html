@@ -18,21 +18,21 @@
     </div>
 
     <nav class="nav">
-      <a href="../HTML/dashboard.html" class="nav-item"><span class="nav-icon">▦</span> Dashboard</a>
-      <a href="#" class="nav-item"><span class="nav-icon">📋</span> My Applications</a>
-      <a href="#" class="nav-item active"><span class="nav-icon">💼</span> Jobs &amp; Internships</a>
-      <a href="#" class="nav-item"><span class="nav-icon">🔖</span> Saved Jobs</a>
-      <a href="#" class="nav-item"><span class="nav-icon">🔔</span> Alerts</a>
-      <a href="#" class="nav-item"><span class="nav-icon">👤</span> Profile</a>
-      <a href="#" class="nav-item"><span class="nav-icon">⚙</span> Settings</a>
-      <a href="#" class="nav-item"><span class="nav-icon">↩</span> Logout</a>
+      <a href="dashboard.html" class="nav-item"><span class="nav-icon">▦</span> Dashboard</a>
+      <a href="applications.html" class="nav-item"><span class="nav-icon">📋</span> My Applications</a>
+      <a href="discovery_jobs.html" class="nav-item active"><span class="nav-icon">💼</span> Jobs &amp; Internships</a>
+      <a href="saved-jobs.html" class="nav-item"><span class="nav-icon">🔖</span> Saved Jobs</a>
+      <a href="#" class="nav-item" id="sidebarAlerts"><span class="nav-icon">🔔</span> Alerts</a>
+      <a href="profile.html" class="nav-item"><span class="nav-icon">👤</span> Profile</a>
+      <a href="settings.html" class="nav-item"><span class="nav-icon">⚙</span> Settings</a>
+      <a href="dashboard.html" class="nav-item"><span class="nav-icon">↩</span> Logout</a>
     </nav>
 
     <div class="help-card">
       <div class="help-icon">?</div>
       <h4>Need Help?</h4>
       <p>We're here to help you. Visit our help center or contact support.</p>
-      <button class="btn btn-outline">Visit Help Center</button>
+      <a href="help.html" class="btn btn-outline" style="text-decoration:none; display:inline-block; text-align:center;">Visit Help Center</a>
     </div>
   </aside>
 
@@ -65,11 +65,11 @@
             <span class="user-name">User ▾</span>
           </button>
           <div class="dropdown user-menu" id="userMenu">
-            <a href="#">My Profile</a>
-            <a href="#">My Applications</a>
-            <a href="#">Settings</a>
+            <a href="profile.html">My Profile</a>
+            <a href="applications.html">My Applications</a>
+            <a href="settings.html">Settings</a>
             <div class="menu-sep"></div>
-            <a href="Login.html" class="logout">Logout</a>
+            <a href="dashboard.html" class="logout">Logout</a>
           </div>
         </div>
 
@@ -406,6 +406,7 @@
   </main>
 </div>
 
-<script src="../JS/discover_ jobs.js"></script>
+<script src="../JavaScript/api.js"></script>
+<script src="../JavaScript/discover_ jobs.js"></script>
 </body>
 </html>

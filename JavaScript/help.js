@@ -3,12 +3,13 @@
    Handles:
    - Interactive FAQ accordion toggle
    - Contact Support form validation
+   - Pre-fills student information dynamically from JSON Server API
    - Simulated message submission with feedback toast & inline confirmation
    ========================================================================== */
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
   setupAccordion();
-  setupContactForm();
+  await setupContactForm();
 });
 
 // Setup FAQ Accordion expand / collapse
@@ -34,17 +35,27 @@ function setupAccordion() {
 }
 
 // Setup Contact Form
-function setupContactForm() {
+async function setupContactForm() {
   const form = document.getElementById("help-contact-form");
   if (!form) return;
 
-  // Pre-fill profile name & email if available
-  const profile = getProfile();
+  // Pre-fill profile name & email if available from API
+  let profile = null;
+  try {
+    if (window.API && typeof API.getProfile === "function") {
+      profile = await API.getProfile();
+    }
+  } catch (err) {
+    console.warn("Could not fetch profile for help form:", err);
+  }
+
+  if (!profile) profile = getProfile();
+
   const nameInput = document.getElementById("contact-name");
   const emailInput = document.getElementById("contact-email");
 
-  if (nameInput && profile.name) nameInput.value = profile.name;
-  if (emailInput && profile.email) emailInput.value = profile.email;
+  if (nameInput && profile && profile.name) nameInput.value = profile.name;
+  if (emailInput && profile && profile.email) emailInput.value = profile.email;
 
   form.addEventListener("submit", function(e) {
     e.preventDefault();
@@ -97,4 +108,3 @@ function setupContactForm() {
     }
   });
 }
-

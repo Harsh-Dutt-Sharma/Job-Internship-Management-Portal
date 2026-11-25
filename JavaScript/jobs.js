@@ -1,26 +1,26 @@
 /* ==========================================================================
    JobPortal - Browse Jobs JavaScript (jobs.js)
    Handles:
-   - Dynamic rendering of available job opportunities
+   - Dynamic rendering of available job opportunities from JSON Server API
    - Search by role, company, location, or keyword
    - Filter by Job Type (Internship vs Full-Time)
-   - Save / Unsave bookmark toggle synced with localStorage
-   - Apply Now flow with duplicate application protection
+   - Save / Unsave bookmark toggle synced with REST API (http://localhost:3000/savedJobs)
+   - Apply Now flow with duplicate application protection synced with API
    - Instant count badge update
    ========================================================================== */
 
 let currentJobsSearch = "";
 let currentTypeFilter = "all";
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
   // Setup search input
   setupJobsSearch();
 
   // Setup type filter
   setupTypeFilter();
 
-  // Render jobs grid
-  renderJobsGrid();
+  // Render jobs grid from API
+  await renderJobsGrid();
 });
 
 // Setup search bar
@@ -59,15 +59,41 @@ function setupTypeFilter() {
   });
 }
 
-// Render the grid of available jobs
-function renderJobsGrid() {
+// Render the grid of available jobs from API
+async function renderJobsGrid() {
   const container = document.getElementById("jobs-grid");
   const countBadge = document.getElementById("jobs-count-badge");
   if (!container) return;
 
-  const allJobs = getAllJobs();
-  const savedJobs = getSavedJobs();
-  const applications = getApplications();
+  container.innerHTML = `
+    <div style="grid-column: 1 / -1; padding: 40px 20px; text-align: center; color: #64748b;">
+      <i class="fa-solid fa-spinner fa-spin fa-2x"></i>
+      <p style="margin-top: 10px;">Loading opportunities from server...</p>
+    </div>
+  `;
+
+  let allJobs = [];
+  let savedJobs = [];
+  let applications = [];
+
+  try {
+    if (window.API) {
+      [allJobs, savedJobs, applications] = await Promise.all([
+        API.getJobs(),
+        API.getSavedJobs(),
+        API.getApplications()
+      ]);
+    } else {
+      allJobs = getAllJobs();
+      savedJobs = getSavedJobs();
+      applications = getApplications();
+    }
+  } catch (err) {
+    console.error("Error loading jobs data:", err);
+    allJobs = getAllJobs();
+    savedJobs = getSavedJobs();
+    applications = getApplications();
+  }
 
   // Filter jobs
   let filtered = allJobs;
@@ -78,10 +104,10 @@ function renderJobsGrid() {
 
   if (currentJobsSearch) {
     filtered = filtered.filter(j => {
-      const roleMatch = j.role.toLowerCase().includes(currentJobsSearch);
-      const companyMatch = j.company.toLowerCase().includes(currentJobsSearch);
-      const locMatch = j.location && j.location.toLowerCase().includes(currentJobsSearch);
-      const descMatch = j.description && j.description.toLowerCase().includes(currentJobsSearch);
+      const roleMatch = (j.role || j.title || "").toLowerCase().includes(currentJobsSearch);
+      const companyMatch = (j.company || "").toLowerCase().includes(currentJobsSearch);
+      const locMatch = (j.location || "").toLowerCase().includes(currentJobsSearch);
+      const descMatch = (j.description || "").toLowerCase().includes(currentJobsSearch);
       return roleMatch || companyMatch || locMatch || descMatch;
     });
   }
@@ -123,16 +149,17 @@ function renderJobsGrid() {
 
   // Render cards
   container.innerHTML = filtered.map(job => {
-    const logoSrc = getCompanyLogo(job.company);
+    const roleTitle = job.role || job.title;
+    const logoSrc = job.logo || getCompanyLogo(job.company);
 
     // Check if bookmarked
     const isBookmarked = savedJobs.some(
-      s => s.role.toLowerCase() === job.role.toLowerCase() && s.company.toLowerCase() === job.company.toLowerCase()
+      s => (s.jobId == job.id) || (s.role && s.role.toLowerCase() === roleTitle.toLowerCase() && s.company.toLowerCase() === job.company.toLowerCase())
     );
 
     // Check if applied
     const alreadyApplied = applications.some(
-      a => a.role.toLowerCase() === job.role.toLowerCase() && a.company.toLowerCase() === job.company.toLowerCase()
+      a => (a.jobId == job.id) || (a.role && a.role.toLowerCase() === roleTitle.toLowerCase() && a.company.toLowerCase() === job.company.toLowerCase())
     );
 
     return `
@@ -142,14 +169,14 @@ function renderJobsGrid() {
             <img src="${logoSrc}" alt="${job.company} logo" />
           </div>
           <div class="job-listing-details">
-            <h3>${job.role}</h3>
+            <h3>${roleTitle}</h3>
             <p>${job.company} <span>•</span> ${job.location}</p>
           </div>
         </div>
 
         <div class="job-listing-meta">
           <span class="badge-job-type"><i class="fa-solid fa-briefcase"></i> ${job.type}</span>
-          <span class="badge-salary"><i class="fa-solid fa-indian-rupee-sign"></i> ${job.salary}</span>
+          <span class="badge-salary"><i class="fa-solid fa-indian-rupee-sign"></i> ${job.salary || job.stipend || 'Competitive'}</span>
         </div>
 
         <p class="job-listing-desc">${job.description}</p>
@@ -172,9 +199,9 @@ function renderJobsGrid() {
   // Wire up bookmark buttons
   const bookmarkBtns = container.querySelectorAll(".btn-bookmark-action");
   bookmarkBtns.forEach(btn => {
-    btn.addEventListener("click", function() {
-      const id = parseInt(this.getAttribute("data-id"));
-      toggleJobBookmark(id);
+    btn.addEventListener("click", async function() {
+      const id = this.getAttribute("data-id");
+      await toggleJobBookmark(id);
     });
   });
 
@@ -182,61 +209,114 @@ function renderJobsGrid() {
   const applyBtns = container.querySelectorAll(".apply-now-btn");
   applyBtns.forEach(btn => {
     btn.addEventListener("click", function() {
-      const id = parseInt(this.getAttribute("data-id"));
+      const id = this.getAttribute("data-id");
       openJobApplyModal(id);
     });
   });
 }
 
-// Toggle Bookmark
-function toggleJobBookmark(jobId) {
-  const allJobs = getAllJobs();
-  const job = allJobs.find(j => j.id === jobId);
+// Toggle Bookmark via API
+async function toggleJobBookmark(jobId) {
+  let allJobs = [];
+  let savedJobs = [];
+
+  try {
+    if (window.API) {
+      allJobs = await API.getJobs();
+      savedJobs = await API.getSavedJobs();
+    } else {
+      allJobs = getAllJobs();
+      savedJobs = getSavedJobs();
+    }
+  } catch (err) {
+    console.error(err);
+    return;
+  }
+
+  const job = allJobs.find(j => j.id == jobId);
   if (!job) return;
 
-  let savedJobs = getSavedJobs();
-  const existingIndex = savedJobs.findIndex(
-    s => s.role.toLowerCase() === job.role.toLowerCase() && s.company.toLowerCase() === job.company.toLowerCase()
+  const roleTitle = job.role || job.title;
+  const existingSaved = savedJobs.find(
+    s => (s.jobId == job.id) || (s.role && s.role.toLowerCase() === roleTitle.toLowerCase() && s.company.toLowerCase() === job.company.toLowerCase())
   );
 
-  // Today's formatted date
   const today = new Date();
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const formattedToday = `${today.getDate()} ${months[today.getMonth()]} ${today.getFullYear()}`;
 
-  if (existingIndex !== -1) {
+  if (existingSaved) {
     // Remove bookmark
-    savedJobs.splice(existingIndex, 1);
-    saveSavedJobs(savedJobs);
-    showToast(`Removed ${job.role} at ${job.company} from Saved Jobs`, "info");
+    try {
+      if (window.API && typeof API.removeSavedJob === "function") {
+        await API.removeSavedJob(existingSaved.id);
+      } else {
+        savedJobs = savedJobs.filter(s => s.id !== existingSaved.id);
+        saveSavedJobs(savedJobs);
+      }
+      showToast(`Removed ${roleTitle} at ${job.company} from Saved Jobs`, "info");
+    } catch (err) {
+      console.error("Error removing bookmark:", err);
+      showToast("Could not remove bookmark.", "error");
+    }
   } else {
     // Add bookmark
     const newSaved = {
-      id: Date.now(),
-      role: job.role,
+      jobId: job.id,
+      userId: 1,
+      role: roleTitle,
       company: job.company,
       location: job.location,
       date: formattedToday,
       type: job.type,
-      salary: job.salary,
+      salary: job.salary || job.stipend,
       description: job.description
     };
-    savedJobs.unshift(newSaved);
-    saveSavedJobs(savedJobs);
-    showToast(`Saved ${job.role} at ${job.company} to Bookmarks!`, "success");
+
+    try {
+      if (window.API && typeof API.saveJob === "function") {
+        await API.saveJob(newSaved);
+      } else {
+        newSaved.id = Date.now();
+        savedJobs.unshift(newSaved);
+        saveSavedJobs(savedJobs);
+      }
+      showToast(`Saved ${roleTitle} at ${job.company} to Bookmarks!`, "success");
+    } catch (err) {
+      console.error("Error saving bookmark:", err);
+      showToast("Could not save bookmark.", "error");
+    }
   }
 
-  renderJobsGrid();
+  await renderJobsGrid();
 }
 
-// Open Apply Flow Modal
-function openJobApplyModal(jobId) {
-  const allJobs = getAllJobs();
-  const job = allJobs.find(j => j.id === jobId);
+// Open Apply Flow Modal with API POST
+async function openJobApplyModal(jobId) {
+  let allJobs = [];
+  try {
+    allJobs = window.API ? await API.getJobs() : getAllJobs();
+  } catch (err) {
+    allJobs = getAllJobs();
+  }
+
+  const job = allJobs.find(j => j.id == jobId);
   if (!job) return;
 
-  const profile = getProfile();
-  const logoSrc = getCompanyLogo(job.company);
+  const roleTitle = job.role || job.title;
+  let profile = { name: "Isha Rana", email: "isha.rana@example.com", phone: "+91 98765 43210" };
+  try {
+    if (window.API) {
+      const p = await API.getProfile();
+      if (p && p.name) profile = p;
+    } else {
+      profile = getProfile();
+    }
+  } catch (err) {
+    console.warn(err);
+  }
+
+  const logoSrc = job.logo || getCompanyLogo(job.company);
 
   const today = new Date();
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -255,35 +335,35 @@ function openJobApplyModal(jobId) {
               <img src="${logoSrc}" alt="${job.company} logo" style="max-width: 38px; max-height: 38px; object-fit: contain;" />
             </div>
             <div>
-              <h4 style="font-size: 15px; font-weight: bold; color: #111827; margin-bottom: 2px;">${job.role}</h4>
+              <h4 style="font-size: 15px; font-weight: bold; color: #111827; margin-bottom: 2px;">${roleTitle}</h4>
               <p style="font-size: 13px; color: #64748b;">${job.company} • ${job.location}</p>
             </div>
           </div>
 
           <div class="form-group">
             <label class="form-label" for="apply-name">Full Name *</label>
-            <input type="text" id="apply-name" class="form-input" value="${profile.name}" required />
+            <input type="text" id="apply-name" class="form-input" value="${profile.name || ''}" required />
           </div>
 
           <div class="form-group">
             <label class="form-label" for="apply-email">Email Address *</label>
-            <input type="email" id="apply-email" class="form-input" value="${profile.email}" required />
+            <input type="email" id="apply-email" class="form-input" value="${profile.email || ''}" required />
           </div>
 
           <div class="form-group">
             <label class="form-label" for="apply-phone">Phone Number *</label>
-            <input type="text" id="apply-phone" class="form-input" value="${profile.phone}" required />
+            <input type="text" id="apply-phone" class="form-input" value="${profile.phone || ''}" required />
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="apply-note">Why are you a good fit? (Optional)</label>
+            <label class="form-label" for="apply-note">Cover Note (Optional)</label>
             <textarea id="apply-note" class="form-textarea" placeholder="Highlight key skills or relevant projects..."></textarea>
           </div>
         </div>
 
         <div class="modal-actions">
           <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Submit Application</button>
+          <button type="submit" class="btn btn-primary" id="btn-submit-quick-apply"><i class="fa-solid fa-paper-plane"></i> Submit Application</button>
         </div>
       </form>
     </div>
@@ -293,14 +373,19 @@ function openJobApplyModal(jobId) {
 
   const form = document.getElementById("browse-apply-form");
   if (form) {
-    form.addEventListener("submit", function(e) {
+    form.addEventListener("submit", async function(e) {
       e.preventDefault();
 
-      const applications = getApplications();
+      let applications = [];
+      try {
+        applications = window.API ? await API.getApplications() : getApplications();
+      } catch (err) {
+        applications = getApplications();
+      }
 
       // Check duplicate
       const alreadyApplied = applications.some(
-        app => app.role.toLowerCase() === job.role.toLowerCase() && app.company.toLowerCase() === job.company.toLowerCase()
+        app => (app.jobId == job.id) || (app.role && app.role.toLowerCase() === roleTitle.toLowerCase() && app.company.toLowerCase() === job.company.toLowerCase())
       );
 
       if (alreadyApplied) {
@@ -310,11 +395,17 @@ function openJobApplyModal(jobId) {
       }
 
       const note = document.getElementById("apply-note").value.trim();
+      const submitBtn = document.getElementById("btn-submit-quick-apply");
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+      }
 
       // Create new application
       const newApp = {
-        id: Date.now(),
-        role: job.role,
+        jobId: job.id,
+        userId: 1,
+        role: roleTitle,
         company: job.company,
         location: job.location,
         date: formattedToday,
@@ -322,14 +413,26 @@ function openJobApplyModal(jobId) {
         notes: note || "Application submitted via Browse Jobs. In review by hiring team."
       };
 
-      applications.unshift(newApp);
-      saveApplications(applications);
+      try {
+        if (window.API && typeof API.addApplication === "function") {
+          await API.addApplication(newApp);
+        } else {
+          newApp.id = Date.now();
+          applications.unshift(newApp);
+          saveApplications(applications);
+        }
 
-      closeModal();
-      renderJobsGrid();
-
-      showToast(`Application for ${job.role} at ${job.company} submitted successfully!`, "success");
+        closeModal();
+        showToast(`Application for ${roleTitle} at ${job.company} submitted successfully!`, "success");
+        await renderJobsGrid();
+      } catch (error) {
+        console.error("Error submitting application:", error);
+        showToast("Failed to submit application. Please try again.", "error");
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Application';
+        }
+      }
     });
   }
 }
-

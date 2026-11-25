@@ -18,8 +18,8 @@
         </div>
         <ul class="navbar">
             <li><a href="home.html">Home</a></li>
-            <li><a href="Jobs-And-Internship.html">Jobs and Intersnips</a></li>
-            <li><a href="Dashboard.html">Dashboard</a></li>
+            <li><a href="jobs.html">Jobs & Internships</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
             <li><a href="Login.html">Login</a></li>
         </ul>
     </nav>
@@ -35,6 +35,17 @@
         <p class="subtitle">
             Fill in your details to submit your application.
         </p>
+
+        <!-- Selected Job Info Banner (Loaded dynamically from API) -->
+        <div id="selected-job-info" style="display: none; background: #eaf3ff; border: 1px solid #cce0ff; border-radius: 8px; padding: 14px 18px; margin-bottom: 20px;">
+            <div style="display: flex; align-items: center; gap: 14px;">
+                <img id="selected-job-logo" src="../images/suitcase_logo.png" alt="Company logo" style="width: 44px; height: 44px; object-fit: contain;">
+                <div>
+                    <h3 id="selected-job-title" style="font-size: 16px; margin: 0; color: #111827; font-weight: 600;">Job Title</h3>
+                    <p id="selected-job-sub" style="font-size: 13px; margin: 3px 0 0; color: #475569;">Company &bull; Location</p>
+                </div>
+            </div>
+        </div>
 
         <form>
 
@@ -84,7 +95,7 @@
                     id="cgpa"
                     name="cgpa"
                     placeholder="Enter your CGPA"
-                    inputmode=""decimal"
+                    inputmode="decimal"
                     required
             >
 
@@ -120,6 +131,7 @@
         </form>
 
     </div>
+<script src="../JavaScript/api.js"></script>
 <script src="../JavaScript/applyjs.js"></script>
 </body>
 </html>
