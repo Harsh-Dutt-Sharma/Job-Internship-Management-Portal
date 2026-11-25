@@ -1,0 +1,31 @@
+{
+  "name": "job-internship-management-portal",
+  "version": "1.0.0",
+  "description": "Job & Internship Management Portal with JSON Server REST API Backend",
+  "main": "JavaScript/common.js",
+  "scripts": {
+    "server": "json-server --watch db.json --port 3000",
+    "start": "json-server --watch db.json --port 3000"
+  },
+  "dependencies": {
+    "json-server": "^0.17.4"
+  },
+  "keywords": [
+    "jobportal",
+    "internship",
+    "dashboard",
+    "json-server",
+    "rest-api"
+  ],
+  "author": "Student Team",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Harsh-Dutt-Sharma/Job-Internship-Management-Portal.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Harsh-Dutt-Sharma/Job-Internship-Management-Portal/issues"
+  },
+  "homepage": "https://github.com/Harsh-Dutt-Sharma/Job-Internship-Management-Portal#readme"
+}

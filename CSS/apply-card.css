@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+nav.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 16px max(5%, 24px);
+  background: #0f4c81;
+  color: #ffffff;
+}
+
+.logo {
+  font-size: 1.4rem;
+}
+
+ul.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul.navbar a,
+nav + a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul.navbar a:hover,
+ul.navbar a:focus-visible {
+  text-decoration: underline;
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+nav + a {
+  display: inline-block;
+  margin: 24px 5% 0;
+  color: #0f4c81;
+  font-weight: 700;
+}
+
+
+.profile-btn {
+    background-color: #2563eb;
+    color: white;
+
+    border: none;
+    padding: 8px 15px;
+
+    border-radius: 4px;
+}
+
+.back-home {
+    width: 600px;
+    margin: 20px auto;
+}
+
+.back-home a {
+    text-decoration: none;
+    color: #2563eb;
+}
+
+.apply-container {
+    width: 600px;
+    margin: 20px auto 40px;
+
+    background-color: white;
+
+    padding: 30px;
+
+    border-radius: 8px;
+}
+
+.apply-container h1 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+
+    margin-bottom: 25px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input,
+textarea {
+    padding: 10px;
+
+    margin-bottom: 15px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 4px;
+
+    font-size: 14px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.submit-btn {
+    padding: 10px;
+
+    background-color: #2563eb;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 4px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #1d4ed8;
+}
+
+.back-home {
+    margin: 20px 0;
+}
+
+.back-home {
+    margin: 20px 0;
+}
+
+.back-home a {
+    display: inline-block;
+    padding: 9px 18px;
+    background-color: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.back-home a:hover {
+    background-color: #1d4ed8;
+}

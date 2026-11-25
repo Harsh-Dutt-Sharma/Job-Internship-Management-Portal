@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Apply Now</title>
+
+    <link rel="stylesheet" href="../CSS/apply-card.css">
+</head>
+
+<body>
+
+   <nav class="navbar">
+        <div class="logo">
+            <b> <span style="color: blue;">Job</span><span style="color: black;">Portal</span></b>
+        </div>
+        <ul class="navbar">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="./discovery_jobs.html">Jobs & Internships</a></li>
+            <li><a href="./dashboard.html">Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <div class="back-home">
+        <a href="home.html">← Back to Home</a>
+    </div>
+
+    <div class="apply-container">
+
+        <h1>Apply Now</h1>
+
+        <p class="subtitle">
+            Fill in your details to submit your application.
+        </p>
+
+        <!-- Selected Job Info Banner (Loaded dynamically from API) -->
+        <div id="selected-job-info" style="display: none; background: #eaf3ff; border: 1px solid #cce0ff; border-radius: 8px; padding: 14px 18px; margin-bottom: 20px;">
+            <div style="display: flex; align-items: center; gap: 14px;">
+                <img id="selected-job-logo" src="../images/suitcase_logo.png" alt="Company logo" style="width: 44px; height: 44px; object-fit: contain;">
+                <div>
+                    <h3 id="selected-job-title" style="font-size: 16px; margin: 0; color: #111827; font-weight: 600;">Job Title</h3>
+                    <p id="selected-job-sub" style="font-size: 13px; margin: 3px 0 0; color: #475569;">Company &bull; Location</p>
+                </div>
+            </div>
+        </div>
+
+        <form>
+
+            <label for="fullname">Full Name</label>
+            <input
+                type="text"
+                id="fullname"
+                placeholder="Enter your full name"
+                required
+            >
+
+            <label for="email">Email</label>
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+            >
+
+            <label for="phone">Phone Number</label>
+            <input
+                type="tel"
+                id="phone"
+                placeholder="Enter your phone number"
+                required
+            >
+
+            <label for="college">College / University</label>
+            <input
+                type="text"
+                id="college"
+                placeholder="Enter your college name"
+                required
+            >
+
+            <label for="course">Course</label>
+            <input
+                type="text"
+                id="course"
+                placeholder="e.g. B.Tech CSE"
+                value="B.Tech CSE"
+                required
+            >
+
+            <label for="cgpa">CGPA</label>
+            <input
+                    type="text"
+                    id="cgpa"
+                    name="cgpa"
+                    placeholder="Enter your CGPA (e.g. 8.5)"
+                    inputmode="decimal"
+                    value="8.5"
+                    required
+            >
+
+            <label for="skills">Skills</label>
+            <input
+                type="text"
+                id="skills"
+                placeholder="e.g. Java, Python, React"
+            >
+
+            <label for="resume">Resume (PDF)</label>
+            <input
+                type="file"
+                id="resume"
+                accept=".pdf"
+            >
+
+            <label for="cover-letter">Cover Letter</label>
+            <textarea
+                id="cover-letter"
+                rows="5"
+                placeholder="Write something about yourself..."
+            ></textarea>
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                Submit Application
+            </button>
+
+        </form>
+
+    </div>
+<script src="../JavaScript/api.js"></script>
+<script src="../JavaScript/applyjs.js"></script>
+</body>
+</html>
