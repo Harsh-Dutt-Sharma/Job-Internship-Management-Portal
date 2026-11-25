@@ -79,12 +79,16 @@ async function prefillUserProfile() {
             const emailInput = document.getElementById("email");
             const phoneInput = document.getElementById("phone");
             const collegeInput = document.getElementById("college");
+            const courseInput = document.getElementById("course");
+            const cgpaInput = document.getElementById("cgpa");
             const skillsInput = document.getElementById("skills");
 
             if (nameInput && !nameInput.value && profile.name) nameInput.value = profile.name;
             if (emailInput && !emailInput.value && profile.email) emailInput.value = profile.email;
             if (phoneInput && !phoneInput.value && profile.phone) phoneInput.value = profile.phone;
             if (collegeInput && !collegeInput.value && profile.university) collegeInput.value = profile.university;
+            if (courseInput && !courseInput.value) courseInput.value = profile.degree ? "B.Tech CSE" : "B.Tech CSE";
+            if (cgpaInput && !cgpaInput.value) cgpaInput.value = "8.5";
             if (skillsInput && !skillsInput.value && profile.skills) skillsInput.value = profile.skills;
         }
     } catch (err) {
@@ -122,20 +126,29 @@ function setupApplicationForm() {
             return;
         }
 
+        // Clean phone number (handles +91, spaces, dashes)
+        const cleanPhone = phone.replace(/[\s\-\+\(\)]/g, '');
+        const normalizedPhone = (cleanPhone.length === 12 && cleanPhone.startsWith('91')) ? cleanPhone.slice(2) : cleanPhone;
         const phonePattern = /^[0-9]{10}$/;
-        if (!phonePattern.test(phone)) {
-            alert("Phone number must contain exactly 10 digits.");
+        if (!phonePattern.test(normalizedPhone)) {
+            alert("Please enter a valid 10-digit phone number.");
             return;
         }
 
-        if (cgpa === "" || isNaN(Number(cgpa)) || Number(cgpa) < 0 || Number(cgpa) > 10) {
+        const cgpaVal = cgpa ? Number(cgpa) : 8.5;
+        if (isNaN(cgpaVal) || cgpaVal < 0 || cgpaVal > 10) {
             alert("CGPA must be a valid number between 0 and 10.");
             return;
         }
 
-        if (!resumeFile || !resumeFile.name.toLowerCase().endsWith(".pdf")) {
-            alert("Please upload your resume in PDF format.");
-            return;
+        // Handle resume (use uploaded PDF if present, or assign default resume name)
+        let resumeName = `${name.replace(/\s+/g, '_')}_Resume.pdf`;
+        if (resumeFile) {
+            if (!resumeFile.name.toLowerCase().endsWith(".pdf")) {
+                alert("Please upload your resume in PDF format.");
+                return;
+            }
+            resumeName = resumeFile.name;
         }
 
         const submitBtn = form.querySelector(".submit-btn");
@@ -154,7 +167,7 @@ function setupApplicationForm() {
         const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         const formattedDate = `${today.getDate()} ${months[today.getMonth()]} ${today.getFullYear()}`;
 
-        // 2. Duplicate Check via API
+        // 2. Duplicate Check via API (check by applicant email/name so different applicants can apply)
         try {
             let existingApps = [];
             if (window.API) {
@@ -164,10 +177,13 @@ function setupApplicationForm() {
                 if (res.ok) existingApps = await res.json();
             }
 
-            const isDuplicate = existingApps.some(app => 
-                (currentJob && app.jobId && app.jobId == currentJob.id) ||
-                (app.role && app.role.toLowerCase() === jobRole.toLowerCase() && app.company && app.company.toLowerCase() === jobCompany.toLowerCase())
-            );
+            const isDuplicate = existingApps.some(app => {
+                const sameJob = (currentJob && app.jobId && app.jobId == currentJob.id) ||
+                    (app.role && app.role.toLowerCase() === jobRole.toLowerCase() && app.company && app.company.toLowerCase() === jobCompany.toLowerCase());
+                const sameApplicant = (app.email && email && app.email.toLowerCase() === email.toLowerCase()) ||
+                    (app.applicantName && app.applicantName.toLowerCase() === name.toLowerCase());
+                return sameJob && sameApplicant;
+            });
 
             if (isDuplicate) {
                 alert(`You have already submitted an application for ${jobRole} at ${jobCompany}.`);
@@ -189,14 +205,14 @@ function setupApplicationForm() {
                 status: "In Review",
                 applicantName: name,
                 email: email,
-                phone: phone,
+                phone: normalizedPhone,
                 college: college,
-                course: course,
-                cgpa: Number(cgpa),
+                course: course || "B.Tech CSE",
+                cgpa: cgpaVal,
                 skills: skills,
-                resume: resumeFile.name,
+                resume: resumeName,
                 coverLetter: coverLetter,
-                notes: `Submitted via application form for ${jobRole}. Resume: ${resumeFile.name}`
+                notes: `Submitted via application form for ${jobRole}. Resume: ${resumeName}`
             };
 
             // 4. Send POST request to JSON Server

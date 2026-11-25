@@ -18,9 +18,8 @@
         </div>
         <ul class="navbar">
             <li><a href="home.html">Home</a></li>
-            <li><a href="jobs.html">Jobs & Internships</a></li>
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="Login.html">Login</a></li>
+            <li><a href="./discovery_jobs.html">Jobs & Internships</a></li>
+            <li><a href="./dashboard.html">Dashboard</a></li>
         </ul>
     </nav>
 
@@ -86,6 +85,7 @@
                 type="text"
                 id="course"
                 placeholder="e.g. B.Tech CSE"
+                value="B.Tech CSE"
                 required
             >
 
@@ -94,8 +94,9 @@
                     type="text"
                     id="cgpa"
                     name="cgpa"
-                    placeholder="Enter your CGPA"
+                    placeholder="Enter your CGPA (e.g. 8.5)"
                     inputmode="decimal"
+                    value="8.5"
                     required
             >
 
@@ -106,12 +107,11 @@
                 placeholder="e.g. Java, Python, React"
             >
 
-            <label for="resume">Resume</label>
+            <label for="resume">Resume (PDF)</label>
             <input
                 type="file"
                 id="resume"
                 accept=".pdf"
-                required
             >
 
             <label for="cover-letter">Cover Letter</label>
