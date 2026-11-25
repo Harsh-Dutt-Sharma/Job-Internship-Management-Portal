@@ -1,20 +1,31 @@
 /* ==========================================================================
    JobPortal - User Profile JavaScript (profile.js)
    Handles:
-   - Display profile details from localStorage
+   - Display profile details from JSON Server REST API (http://localhost:3000/profile)
    - Form population & editing for Name, Email, Phone, Location, Skills
-   - Form validation & saving to localStorage
-   - Synchronization of header greeting & name
+   - Form validation & saving to API via PATCH
+   - Synchronization of header greeting & name across all pages
    ========================================================================== */
 
-document.addEventListener("DOMContentLoaded", function() {
-  loadProfileData();
+document.addEventListener("DOMContentLoaded", async function() {
+  await loadProfileData();
   setupProfileForm();
 });
 
-// Load and populate profile fields
-function loadProfileData() {
-  const profile = getProfile();
+// Load and populate profile fields from API
+async function loadProfileData() {
+  let profile = null;
+  try {
+    if (window.API && typeof API.getProfile === "function") {
+      profile = await API.getProfile();
+    }
+  } catch (err) {
+    console.warn("Could not fetch profile from API, using fallback:", err);
+  }
+
+  if (!profile || !profile.name) {
+    profile = getProfile();
+  }
 
   // Overview card
   const avatarLarge = document.getElementById("avatar-large");
@@ -28,7 +39,7 @@ function loadProfileData() {
   if (avatarLarge) avatarLarge.textContent = profile.initials || "IR";
   if (viewName) viewName.textContent = profile.name;
   if (viewHeadline) viewHeadline.textContent = profile.headline || "Aspiring Developer";
-  if (viewLocation) viewLocation.innerHTML = `<i class="fa-solid fa-location-dot"></i> ${profile.location}`;
+  if (viewLocation) viewLocation.innerHTML = `<i class="fa-solid fa-location-dot"></i> ${profile.location || 'Bengaluru, India'}`;
   if (viewEmail) viewEmail.textContent = profile.email;
   if (viewPhone) viewPhone.textContent = profile.phone;
 
@@ -54,12 +65,12 @@ function loadProfileData() {
   if (skillsInput) skillsInput.value = profile.skills || "";
 }
 
-// Setup form submit handler
+// Setup form submit handler with API PATCH
 function setupProfileForm() {
   const form = document.getElementById("profile-edit-form");
   if (!form) return;
 
-  form.addEventListener("submit", function(e) {
+  form.addEventListener("submit", async function(e) {
     e.preventDefault();
 
     const name = document.getElementById("profile-name").value.trim();
@@ -73,6 +84,12 @@ function setupProfileForm() {
     if (!name || !email || !phone || !location) {
       showToast("Please fill in all required fields (Name, Email, Phone, Location).", "error");
       return;
+    }
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
     }
 
     // Compute initials from name
@@ -94,15 +111,33 @@ function setupProfileForm() {
       skills: skills
     };
 
-    saveProfile(updatedProfile);
+    try {
+      if (window.API && typeof API.updateProfile === "function") {
+        await API.updateProfile(updatedProfile);
+      } else {
+        saveProfile(updatedProfile);
+      }
 
-    // Sync header on this page
-    syncHeaderProfile();
+      // Also update localStorage as cache
+      localStorage.setItem("jobportal_profile", JSON.stringify(updatedProfile));
 
-    // Re-populate view
-    loadProfileData();
+      // Sync header on this page
+      if (typeof syncHeaderProfile === "function") {
+        await syncHeaderProfile();
+      }
 
-    showToast("Profile details updated successfully!", "success");
+      // Re-populate view
+      await loadProfileData();
+
+      showToast("Profile details updated successfully!", "success");
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      showToast("Failed to save profile on server.", "error");
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Save Profile';
+      }
+    }
   });
 }
-

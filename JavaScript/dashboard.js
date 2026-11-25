@@ -1,33 +1,43 @@
 /* ==========================================================================
    JobPortal - Dashboard JavaScript (dashboard.js)
    Handles:
-   - Dynamic application counts calculation from localStorage
+   - Dynamic application counts calculation from JSON Server REST API
    - Interactive Summary Cards filtering & navigation
-   - Dynamic Recent Applications rendering & View Details modal
-   - Dynamic Saved Jobs rendering with remove bookmark functionality
+   - Dynamic Recent Applications rendering & View Details modal from API
+   - Dynamic Saved Jobs rendering with API remove bookmark functionality
    - Functional View All links & buttons
    ========================================================================== */
 
-document.addEventListener("DOMContentLoaded", function() {
-  // Update summary numbers from localStorage
-  updateSummaryCounts();
+document.addEventListener("DOMContentLoaded", async function() {
+  // Update summary numbers from API
+  await updateSummaryCounts();
 
   // Make summary cards interactive
   setupSummaryCards();
 
-  // Render recent applications list
-  renderRecentApplications();
+  // Render recent applications list from API
+  await renderRecentApplications();
 
-  // Render saved jobs list
-  renderSavedJobs();
+  // Render saved jobs list from API
+  await renderSavedJobs();
 
   // Setup View All Applications buttons
   setupViewAllButtons();
 });
 
-// Update the 4 summary numbers based on current localStorage data
-function updateSummaryCounts() {
-  const applications = getApplications();
+// Update the 4 summary numbers based on API data
+async function updateSummaryCounts() {
+  let applications = [];
+  try {
+    if (window.API && typeof API.getApplications === "function") {
+      applications = await API.getApplications();
+    } else {
+      applications = getApplications();
+    }
+  } catch (error) {
+    console.warn("Could not load applications from API, using fallback:", error);
+    applications = getApplications();
+  }
 
   const total = applications.length;
   const shortlisted = applications.filter(app => app.status === "Shortlisted").length;
@@ -77,12 +87,29 @@ function setupSummaryCards() {
   }
 }
 
-// Render Recent Applications (latest 5)
-function renderRecentApplications() {
+// Render Recent Applications (latest 5) from API
+async function renderRecentApplications() {
   const container = document.getElementById("dashboard-recent-apps");
   if (!container) return;
 
-  const applications = getApplications();
+  container.innerHTML = `
+    <div style="padding: 24px 0; text-align: center; color: #64748b;">
+      <i class="fa-solid fa-spinner fa-spin"></i> Loading recent applications...
+    </div>
+  `;
+
+  let applications = [];
+  try {
+    if (window.API && typeof API.getApplications === "function") {
+      applications = await API.getApplications();
+    } else {
+      applications = getApplications();
+    }
+  } catch (error) {
+    console.error("Error fetching applications:", error);
+    applications = getApplications();
+  }
+
   const recentApps = applications.slice(0, 5);
 
   if (recentApps.length === 0) {
@@ -126,18 +153,35 @@ function renderRecentApplications() {
   const appCards = container.querySelectorAll(".application");
   appCards.forEach(card => {
     card.addEventListener("click", function() {
-      const id = parseInt(this.getAttribute("data-id"));
+      const id = this.getAttribute("data-id");
       showApplicationDetails(id);
     });
   });
 }
 
-// Render Saved Jobs (up to 5)
-function renderSavedJobs() {
+// Render Saved Jobs (up to 5) from API
+async function renderSavedJobs() {
   const container = document.getElementById("dashboard-saved-jobs");
   if (!container) return;
 
-  const savedJobs = getSavedJobs();
+  container.innerHTML = `
+    <div style="padding: 24px 0; text-align: center; color: #64748b;">
+      <i class="fa-solid fa-spinner fa-spin"></i> Loading saved jobs...
+    </div>
+  `;
+
+  let savedJobs = [];
+  try {
+    if (window.API && typeof API.getSavedJobs === "function") {
+      savedJobs = await API.getSavedJobs();
+    } else {
+      savedJobs = getSavedJobs();
+    }
+  } catch (error) {
+    console.error("Error fetching saved jobs:", error);
+    savedJobs = getSavedJobs();
+  }
+
   const displayJobs = savedJobs.slice(0, 5);
 
   if (displayJobs.length === 0) {
@@ -171,21 +215,30 @@ function renderSavedJobs() {
   // Wire up remove bookmark buttons
   const removeButtons = container.querySelectorAll(".remove-saved-btn");
   removeButtons.forEach(btn => {
-    btn.addEventListener("click", function(e) {
+    btn.addEventListener("click", async function(e) {
       e.stopPropagation();
-      const id = parseInt(this.getAttribute("data-id"));
-      removeSavedJob(id);
+      const id = this.getAttribute("data-id");
+      await removeSavedJob(id);
     });
   });
 }
 
-// Remove saved job from localStorage & refresh dashboard saved jobs list
-function removeSavedJob(jobId) {
-  let savedJobs = getSavedJobs();
-  savedJobs = savedJobs.filter(job => job.id !== jobId);
-  saveSavedJobs(savedJobs);
-  renderSavedJobs();
-  showToast("Job removed from Saved Jobs", "info");
+// Remove saved job from API & refresh dashboard saved jobs list
+async function removeSavedJob(jobId) {
+  try {
+    if (window.API && typeof API.removeSavedJob === "function") {
+      await API.removeSavedJob(jobId);
+    } else {
+      let savedJobs = getSavedJobs();
+      savedJobs = savedJobs.filter(job => job.id != jobId);
+      saveSavedJobs(savedJobs);
+    }
+    showToast("Job removed from Saved Jobs", "info");
+    await renderSavedJobs();
+  } catch (error) {
+    console.error("Error removing saved job:", error);
+    showToast("Failed to remove saved job.", "error");
+  }
 }
 
 // Setup View All Applications button and links
@@ -199,9 +252,21 @@ function setupViewAllButtons() {
 }
 
 // Show Application Details in a modal
-function showApplicationDetails(appId) {
-  const applications = getApplications();
-  const app = applications.find(a => a.id === appId);
+async function showApplicationDetails(appId) {
+  let app = null;
+  try {
+    if (window.API && typeof API.getApplicationById === "function") {
+      app = await API.getApplicationById(appId);
+    }
+  } catch (e) {
+    console.warn("Could not fetch application by ID from API:", e);
+  }
+
+  if (!app) {
+    const applications = (window.API ? await API.getApplications() : null) || getApplications();
+    app = applications.find(a => a.id == appId);
+  }
+
   if (!app) return;
 
   const logoSrc = getCompanyLogo(app.company);
@@ -261,4 +326,3 @@ function showApplicationDetails(appId) {
 
   openModal(modalHtml);
 }
-
