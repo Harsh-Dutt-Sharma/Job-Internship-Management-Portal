@@ -18,6 +18,14 @@
     "rest-api"
   ],
   "author": "Student Team",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Harsh-Dutt-Sharma/Job-Internship-Management-Portal.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Harsh-Dutt-Sharma/Job-Internship-Management-Portal/issues"
+  },
+  "homepage": "https://github.com/Harsh-Dutt-Sharma/Job-Internship-Management-Portal#readme"
 }
-
