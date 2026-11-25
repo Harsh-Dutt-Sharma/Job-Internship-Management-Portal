@@ -397,6 +397,13 @@ function getCompanyLogo(company) {
   if (name.includes("swiggy")) return "../images/swiggy.png";
   if (name.includes("amazon")) return "../images/amazon.png";
   if (name.includes("zomato")) return "../images/zomato.png";
+  if (name.includes("adobe")) return "../images/adobe.svg";
+  if (name.includes("flipkart")) return "../images/flipkart.svg";
+  if (name.includes("uber")) return "../images/uber.svg";
+  if (name.includes("infosys")) return "../images/infosys.svg";
+  if (name.includes("tcs")) return "../images/tcs.svg";
+  if (name.includes("deloitte")) return "../images/deloitte.svg";
+  if (name.includes("paytm")) return "../images/paytm.svg";
   return "../images/suitcase_logo.png";
 }
 

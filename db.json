@@ -125,7 +125,7 @@
       "duration": "3 months",
       "skills": "Python, SQL, Data Analysis, Excel, Tableau",
       "description": "Analyze customer datasets, track key business metrics, and build data visualization dashboards for product teams.",
-      "logo": "../images/suitcase_logo.png",
+      "logo": "../images/flipkart.svg",
       "detailsPage": "jobs.html",
       "posted": "1 week ago"
     },
@@ -143,7 +143,7 @@
       "duration": "6 months",
       "skills": "Java, Spring Boot, REST APIs, Microservices",
       "description": "Develop robust backend services, REST APIs, and microservices using Java and modern software engineering practices.",
-      "logo": "../images/suitcase_logo.png",
+      "logo": "../images/adobe.svg",
       "detailsPage": "jobs.html",
       "posted": "1 week ago"
     },
@@ -161,7 +161,7 @@
       "duration": "6 months",
       "skills": "Go, Python, Microservices, Kafka",
       "description": "Design high-throughput backend services powering ride matching and routing algorithms.",
-      "logo": "../images/suitcase_logo.png",
+      "logo": "../images/uber.svg",
       "detailsPage": "jobs.html",
       "posted": "1 week ago"
     },
@@ -179,7 +179,7 @@
       "duration": "Permanent",
       "skills": "React, JavaScript, HTML5, CSS3, Redux",
       "description": "Looking for an enthusiastic React Developer to build responsive user interfaces and integrate client APIs.",
-      "logo": "../images/suitcase_logo.png",
+      "logo": "../images/infosys.svg",
       "detailsPage": "jobs.html",
       "posted": "2 weeks ago"
     },
@@ -197,7 +197,7 @@
       "duration": "6 months",
       "skills": "HTML, CSS, JavaScript, Web Accessibility",
       "description": "Join our frontend engineering team to develop modern enterprise applications with clean HTML, CSS and JavaScript.",
-      "logo": "../images/suitcase_logo.png",
+      "logo": "../images/tcs.svg",
       "detailsPage": "jobs.html",
       "posted": "2 weeks ago"
     },
@@ -251,7 +251,7 @@
       "duration": "6 months",
       "skills": "HTML5, CSS3, JavaScript, Client APIs",
       "description": "Work with global consulting clients to deliver cutting-edge web platforms and digital transformation solutions.",
-      "logo": "../images/suitcase_logo.png",
+      "logo": "../images/deloitte.svg",
       "detailsPage": "jobs.html",
       "posted": "5 days ago"
     },
@@ -269,7 +269,7 @@
       "duration": "6 months",
       "skills": "Java, MySQL, Unit Testing, Spring",
       "description": "Contribute to payment gateway workflows, unit tests, code reviews, and software feature development.",
-      "logo": "../images/suitcase_logo.png",
+      "logo": "../images/paytm.svg",
       "detailsPage": "jobs.html",
       "posted": "6 days ago"
     },
@@ -305,7 +305,7 @@
       "duration": "Permanent",
       "skills": "Node.js, Express, MongoDB, Redis, Docker",
       "description": "Design and maintain robust, scalable APIs and backend services using languages like Go, Python, Java, or Node.js. Reduce latency and handle massive daily request volumes.",
-      "logo": "../images/zomato.jpg",
+      "logo": "../images/zomato.png",
       "detailsPage": "zomato.html",
       "posted": "5 days ago"
     },
@@ -323,7 +323,7 @@
       "duration": "6 months",
       "skills": "Python, Machine Learning, AI, Pandas, Scikit-learn",
       "description": "Work with data science mentors on building machine learning pipelines, predictive modeling, and feature engineering for enterprise systems.",
-      "logo": "../images/suitcase_logo.png",
+      "logo": "../images/tcs.svg",
       "detailsPage": "jobs.html",
       "posted": "1 week ago"
     }
@@ -500,6 +500,26 @@
       "coverLetter": "I am a good product designer.",
       "notes": "Submitted via application form for Product Designer. Resume: TAFL Assignment - II Submission.pdf",
       "id": 14
+    },
+    {
+      "jobId": 12,
+      "userId": 1,
+      "role": "Software development Engineer Intern",
+      "company": "Amazon",
+      "location": "Bengaluru, India",
+      "date": "25 Nov 2026",
+      "status": "In Review",
+      "applicantName": "HARSH DUTT SHARMA",
+      "email": "isha.rana@example.com",
+      "phone": "9876543210",
+      "college": "ABC Institute of Technology",
+      "course": "B.Tech CSE",
+      "cgpa": 8.5,
+      "skills": "HTML5, CSS3, JavaScript, React, Git, Problem Solving",
+      "resume": "DL LAB Experiment List.pdf",
+      "coverLetter": "I am skilled software developer engineer.",
+      "notes": "Submitted via application form for Software development Engineer Intern. Resume: DL LAB Experiment List.pdf",
+      "id": 15
     }
   ],
   "savedJobs": [
